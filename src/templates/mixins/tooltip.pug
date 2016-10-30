@@ -1,0 +1,6 @@
+mixin tooltip(title, content)
+	li.tooltip
+		.tooltip__init= title
+		p.tooltip__body
+			span.tooltip__title= title
+			| !{content}

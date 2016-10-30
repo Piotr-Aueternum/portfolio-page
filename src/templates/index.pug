@@ -1,0 +1,74 @@
+include ./mixins/tooltip
+doctype html
+html
+	include ./partials/head
+	body
+		include ./partials/header
+		main#fullpage
+			section.section.fullPage.fullPage--intro(data-anchor='intro')
+				.container
+					h1.fullPage__heading Frontend Developer
+					h2.fullPage__lead Piotr Sochacz
+			section.section.fullPage.fullPage--about(data-anchor='about')
+				.container
+					h2.fullPage__heading O mnie
+					.fullPage__content Pasjonuję się frontendem, jego nauka przychodzi mi łatwo i przyjemnie. <br>Przy tworzeniu skupiam się na tym aby jak najlepiej zbudować stronę,<br> dzięki temu łatwo można rozbudować projekt o kolejne komponenty.<br> Dzięki solidnej strukturze wszystko komponuje się w solidną całość.
+					.fullPage__content Frontendu zacząłem się uczyć od końcówki października 2015 roku.<br> Poznałem wiele przydatnych technologii i zdobyłem doświadczenie<br> w realizacji projektów. Zamierzam dalej się rozwijać w tym kierunku,<br> jest to moje hobby i praca, lubię tworzyć i widzieć jak to się rozwija.
+			section.section.fullPage.fullPage--skills(data-anchor='skills')
+				.container
+					h2.fullPage__heading Technologie
+					.fullPage__grid
+						.skills
+							.skills__col
+								h3 HTML5
+								ul
+									+tooltip('Pug(Jade)', 'Przyśpiesza moją pracę, pilnuje spójności kodu, pozwala zorganizować lepiej kod źródłowy.')
+									+tooltip('Semantyka', 'W projektach stosuję znaczniki HTML5, aby&nbsp;kod był bardziej czytelny i lepiej widziany przez przeglądarki.')
+							.skills__col
+								h3 CSS3
+								ul
+									+tooltip('Stylus', 'Mój ulubiony preprocesor, pozwalający na lepszą organizacje kodu, jest&nbsp;odchudzony ze wszystkich zbędnych rzeczy, które zawiera CSS wewnątrz swojej składni.')
+									+tooltip('Sass/SCSS', 'Preprocesor do organizacji i przyśpieszenia pracy, jeden z najbardziej popularnych.')
+									+tooltip('Less', 'Super lekki i&nbsp;szybki preprocesor, pierwszy który poznałem.')
+									+tooltip('Animacje', 'Lubię tworzyć minimalistyczne animacje 2D/3D z użyciem CSS.')
+							.skills__col
+								h3 JS
+								ul
+									+tooltip('jQuery', 'Biblioteka przyśpieszająca moją pracę, w operowaniu nad DOM.')
+									+tooltip('d3.js', 'Zaoszczędzenie czasu poprzez szybkie tworzenie animacji na stronie i łatwego ustawiania opóźnień przy animacjach.')
+									+tooltip('snap.svg', 'Przydatne narzędzie do pracy przy technologii animowania SVG.')
+									+tooltip('bodymovin', 'Podpinanie otrzymanych animacji z&nbsp;pakietu Adobe After Effects i&nbsp;wyeksportowanych za&nbsp;pomocą bodymovin.')
+									+tooltip('Vanilla Javascript', 'Stworzyłem prosty czatbox na potrzeby samorozwoju, można znaleźć na moim profilu codepen.')
+							.skills__col
+								h3 Automatyzacja
+								ul
+									+tooltip('Gulp', 'Dobrze zaznajomiłem się z&nbsp;Gulpem i na swoje potrzeby tworze dedykowane konfiguracje do projektów.')
+									+tooltip('Grunt', 'Pierwszy taskrunner jaki poznałem wraz z generatorem Yeoman.')
+					h2.fullPage__heading Miałem do czynienia
+					.skills
+						.skills__col
+							h3 JS
+							ul
+								+tooltip('React', 'Mam zamiar w najbliższym czasie bardziej poznać Reacta.')
+								+tooltip('Webpack', 'Stworzenie prostego configu z&nbsp;Reactem i Babelem.')
+						.skills__col
+							h3 PHP
+							ul
+								+tooltip('Magento 1.x', 'Stworzenie struktury pod Magento i wdrożenie jej, podstawowa funkcjonalność.')
+								+tooltip('Contao 3.x', 'Zaznajomienie się ze strukturą i&nbsp;panel adminem.')
+								+tooltip('Wordpress', 'Znajomość panelu admina, lokalizacji plików.')
+						.skills__col
+							h3 Pozostałe
+							ul
+								+tooltip('SQL', 'Tworzenie prostych zapytań do&nbsp;bazy SQL.')
+								+tooltip('Markdown', 'Poznałem go podczas tworzenia treści na mediawiki.')
+			section.section.fullPage.fullPage--projects(data-anchor='projects')
+				.container
+					h2.fullPage__heading Zakres prac
+					.fullPage__content Piotr Sochacz
+			section.section.fullPage.fullPage--contact(data-anchor='contact')
+				.container
+					h2.fullPage__heading Kontakt
+					.fullPage__content Piotr Sochacz
+		include ./partials/footer
+		include ./partials/foot

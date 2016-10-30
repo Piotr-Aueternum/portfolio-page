@@ -1,0 +1,12 @@
+.c-list
+	margin-bottom 2rem
+	&__item
+		list-style disc
+		margin-left 2rem
+		&:first-child:first-letter
+			text-transform uppercase
+		&:last-child
+			&:after
+				content '.'
+		&:after
+			content ','

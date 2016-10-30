@@ -1,0 +1,44 @@
+.skills
+	display flex
+	width 100%
+	margin-bottom 2rem
+	&__tooltip
+		content attr(data-tooltip)
+		width 25rem
+		background-color #b8efb8
+		display block
+		position absolute
+		top 150%
+		left 0
+		z-index 3
+		opacity 0
+		visibility hidden
+		transition visibility 0s 0.5s, opacity 0.2s ease-in-out 0.3s
+		padding 1rem 1.5rem
+		border-radius 5px
+		box-shadow inset 0 0 0 2px #b8efb8, inset 0 0 0 5px #fff
+	&__tooltipTitle
+		position absolute
+		top -1.5rem
+		display block
+		background-color #b8efb8
+		padding 0 1rem
+		border-radius 5px
+		z-index -1
+	&__col
+		flex-basis 25%
+		h3
+			letter-spacing 0.025em
+			margin-bottom 1rem
+			&::after
+				content ''
+				height 0.3rem
+				background-color #f00
+				opacity 0.5
+				margin-top 1rem
+				width 3rem
+				display block
+		li
+			letter-spacing 0.05em
+			line-height 1.5
+			position relative

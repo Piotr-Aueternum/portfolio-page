@@ -1,0 +1,108 @@
+colors = #fff #4C31FF #C40CE8 #FF0000 #E85F0C #FFB70D
+easing = cubic-bezier(0.43, 1.99, 0.58, 0.87)
+switchDuration = 0.3s
+rotateAmount = 23deg
+ratio = 4
+@keyframes onClickAnim
+  0%
+    transform scale(1)
+  50%
+    transform scale(0.5)
+    opacity 0.4
+  100%
+    transform scale(1)
+.dev
+  .nav__list
+    li
+      background-color rgba(0,0,0,0.5)
+.nav
+  &__list
+    position relative
+    right 10px
+    top 6px
+    z-index 1
+    li
+      position absolute
+      right 0
+      top 4px
+      width 4rem
+      height 4rem
+      transform-origin 85% center
+      transition switchDuration cubic-bezier(0.59, 1.69, 0.48, 0.74)
+      transition-property transform, width
+      will-change transform, width
+      mix-blend-mode multiply
+      for color, i in colors
+        &:nth-child({i})
+          transition-delay 0.05s * 5 - (i * 0.05s)
+          // transform rotate(-(ratio*i*rotateAmount - rotateAmount))
+          a
+            // transform rotate((ratio*i*rotateAmount - rotateAmount))
+            background-color color
+            transition transform switchDuration cubic-bezier(0.59, 1.69, 0.48, 0.74)
+      // transform rotate(rotateAmount)
+      a
+        display inline-block
+        transform rotate(- rotateAmount)
+        background-color #422ecc
+        border-radius 50%
+        height 4rem
+        width 4rem
+        display inline-flex
+        justify-content center
+        align-items center
+        &:focus
+          animation onClickAnim 0.3s
+          outline 0
+    &.active
+      li
+        width 15rem
+      for color, i in colors
+        li:nth-child({i})
+          transform rotate(-(i*rotateAmount - rotateAmount))
+          transition-delay i*0.05s
+          a
+            transform rotate((i*rotateAmount - rotateAmount))
+            background-color color
+  &__toggle
+    position absolute
+    right 1rem
+    top 1rem
+    z-index 2
+    cursor pointer
+    width 40px
+    height 40px
+    border-radius 50%
+    box-shadow 0 1px 2px -1px #333;
+    &::before
+    &::after
+      position absolute
+      top 19px
+      content ''
+      display block
+      width 30px
+      left 5px
+      height 2px
+      background-color #fff
+      transition .3s easing
+      transition-property transform, top, color
+    &::before
+      top 16px
+      transform rotateY(180deg)
+    &::after
+      top 22px
+      transform rotateY(-180deg)
+    &:hover
+      &::before
+        transform rotateY(360deg)
+      &::after
+        transform rotateY(-360deg)
+    &.active
+      &::before
+      &::after
+        top 19px
+        background-color #333
+      &::before
+        transform rotate(45deg)
+      &::after
+        transform rotate(-45deg)

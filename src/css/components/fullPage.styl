@@ -1,0 +1,54 @@
+.fullPage
+  min-height 100vh
+  display flex
+  align-items center
+  justify-content center
+  flex-direction column
+  &__heading
+  &__lead
+    font-weight 400
+    letter-spacing 0.05rem
+  &__heading
+    position relative
+    margin-bottom 2rem
+    z-index 1
+    &::before
+      content ''
+      position absolute
+      top 0
+      left -1rem
+      height 100%
+      width 0.4rem
+      display block
+      background-color #000
+      opacity 0.7
+  &__lead
+    font-family 'Dosis', sans-serif
+  &__content
+    line-height 1.7
+    letter-spacing 0.05rem
+    color #333
+    font-weight 500
+    &:not(:last-child)
+      margin-bottom 1.6rem * 1.5
+  &--intro
+    & ^[0]__heading
+      &::before
+        background-color #4c31ff
+  &--about
+    & ^[0]__heading
+      &::before
+        background-color #c40ce8
+  &--skills
+    & ^[0]__heading
+      &::before
+        background-color #f00
+  &--projects
+    & ^[0]__heading
+      &::before
+        background-color #e85f0c
+  &--contact
+    & ^[0]__heading
+      &::before
+        background-color #ffb70d
+        

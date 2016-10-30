@@ -1,0 +1,30 @@
+.c-article
+	padding 1.5rem
+	margin 0 auto
+	background-color cnorm + cone
+	font-family Lato
+	border-radius 20px
+	box-shadow inset 0 0 6px -1px cdark + ctwo
+	min-height 30vh
+	transition .7s ease-in-out
+	transition-property width, min-height, margin-top, border-radius, background-color, box-shadow
+	display flex
+	align-items center
+	justify-content center
+	flex-direction column
+	color cdark
+	+min(sm)
+		width 600px
+		padding 3rem 5rem
+	&:hover
+		width 100%
+		min-height 100vh
+		margin-top 0
+		border-radius 0
+		background-color clight
+		box-shadow inset 0 0 6px -1px clight
+	&__header
+	&__body
+		font-size inherit
+	&__footer
+		align-self flex-end
