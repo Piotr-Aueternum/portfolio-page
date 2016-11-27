@@ -1,5 +1,5 @@
                       require('es6-promise').polyfill();
-const gulp          = require('gulp'),
+var gulp            = require('gulp'),
       include       = require('gulp-include'),
       bs            = require('browser-sync').create(),
       rename        = require('gulp-rename'),
@@ -14,9 +14,9 @@ const gulp          = require('gulp'),
       gulpPug       = require('gulp-pug'),
       htmlmin       = require('gulp-htmlmin'),
       chalk         = require('chalk');
-
+var __dirName = '../dist/';
 function consoleTime() {
-    const date = new Date();
+    var date = new Date();
     var h = date.getHours();
     h = (h < 10 ? "0" : "") + h;
     var m  = date.getMinutes();
@@ -27,20 +27,26 @@ function consoleTime() {
 }
 gulp.task('image', function () {
   gulp.src('src/img/**')
-    .pipe(gulp.dest('../dist/assets/img'));
+    .pipe(gulp.dest(__dirName + 'assets/img'));
 });
+
 gulp.task('sprite', function () {
-  const spriteData = gulp.src('src/assets/css/sprites/*.png').pipe(spritesmith({
-    imgName: 'sprite.png',
-    cssName: 'sprite.css'
-  }));
-  const imgStream = spriteData.img
-    .pipe(gulp.dest('src/assets/css/'));
-  const cssStream = spriteData.css
+
+  var spriteData = gulp.src('src/css/sprites/*.png')
+    .pipe(spritesmith({
+      imgName: 'sprite.png',
+      cssName: 'sprite.css'
+    }));
+
+  var imgStream = spriteData.img
+    .pipe(gulp.dest(__dirName + 'assets/'));
+
+  var cssStream = spriteData.css
     .pipe(rename({
       extname: ".styl"
     }))
-    .pipe(gulp.dest('src/assets/css/tools/'));
+    .pipe(gulp.dest('src/css/tools/'));
+
   return merge(imgStream, cssStream);
 });
 gulp.task('html', function() {
@@ -51,8 +57,8 @@ gulp.task('html', function() {
     }))
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(plumber.stop())
-    .pipe(gulp.dest('../dist'))
-    .pipe(bs.stream({once: true}))
+    .pipe(gulp.dest(__dirName))
+    .pipe(bs.stream({once: true}));
 });
 gulp.task('jshint', function() {
   return gulp.src('src/js/bundle.js')
@@ -60,10 +66,10 @@ gulp.task('jshint', function() {
     .pipe(include())
     // .pipe(uglify())
     .pipe(plumber.stop())
-    .pipe(gulp.dest('../dist/assets'));
+    .pipe(gulp.dest(__dirName + 'assets'));
 });
 gulp.task('go', ['watch'], function() {
-    console.log('Go!');
+    console.log(consoleTime() + 'Go!');
     bs.init({
         server: "../dist",
         open: false
@@ -82,13 +88,13 @@ gulp.task('stylus', function() {
       console.log(consoleTime() + details.name + ' minified size ' + chalk.cyan(((details.stats.minifiedSize)/1024).toPrecision(4))+chalk.bold("KB"));
       console.log(consoleTime() + "Saved "+ chalk.yellow.bold((100 / details.stats.originalSize * (details.stats.originalSize - details.stats.minifiedSize)).toPrecision(4) +"%")+", "+chalk.cyan(((details.stats.originalSize - details.stats.minifiedSize)/1024).toPrecision(4))+chalk.bold("KB"));
     }))
-    .pipe(gulp.dest('../dist/assets'))
+    .pipe(gulp.dest(__dirName + 'assets'))
     .pipe(bs.stream({match: "**/*.css"}));
 });
 gulp.task('watch', function() {
   gulp.watch('src/js/**/*.js', ['jshint']);
   gulp.watch('src/css/**/*.styl', ['stylus']);
   gulp.watch('src/img/**', ['image']);
-  gulp.watch('src/sprites/**', ['sprite']);
+  gulp.watch('src/css/sprites/**', ['sprite']);
   gulp.watch('src/**/*.pug', ['html']);
 });
