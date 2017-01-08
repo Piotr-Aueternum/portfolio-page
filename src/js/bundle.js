@@ -1,5 +1,6 @@
 //=require lib/jquery.fullPage.js
+//=require class/Nav.js
 $(document).ready(function() {
-	$('#fullpage').fullpage()
-//=require modules/nav.js
+  //=require modules/fullpage.js
+  //=require modules/nav.js
 });

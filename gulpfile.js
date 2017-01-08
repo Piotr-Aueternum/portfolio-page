@@ -1,3 +1,5 @@
+global.require = require;
+global.__dirname = __dirname;
                       require('es6-promise').polyfill();
 var gulp            = require('gulp'),
       include       = require('gulp-include'),
@@ -53,9 +55,9 @@ gulp.task('html', function() {
   return gulp.src('src/templates/*.pug')
     .pipe(plumber())
     .pipe(gulpPug({
-      // pretty: true
+      pretty: true
     }))
-    .pipe(htmlmin({collapseWhitespace: true}))
+    // .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(plumber.stop())
     .pipe(gulp.dest(__dirName))
     .pipe(bs.stream({once: true}));
@@ -68,7 +70,7 @@ gulp.task('jshint', function() {
     .pipe(plumber.stop())
     .pipe(gulp.dest(__dirName + 'assets'));
 });
-gulp.task('go', ['watch'], function() {
+gulp.task('default', ['watch'], function() {
     console.log(consoleTime() + 'Go!');
     bs.init({
         server: "../dist",
