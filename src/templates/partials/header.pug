@@ -1,13 +1,19 @@
 header.header
   nav.header__nav.nav
     ul.nav__list.nav-list
-      - const icons = require(__dirname + '/src/data/header-svg/header-svg-debug.json').icons;
+      - const icons = require(__dirname + '/src/data/header-svg/header-svg.json').icons;
       - for(const icon of icons) {
         - const anchor = icon.svg.anchor;
         li.nav-list__item
-          a.nav-list__link
+          a.nav-list__link(href=anchor.href, title=anchor.title)
             - const attr = icon.svg.attr;
-            svg
+            svg(
+              x=attr.x || 0,
+              y=attr.y || 0,
+              height=attr.height || 0,
+              width=attr.width || 0,
+              viewBox=attr.viewBox || 0
+            )
               - function createGroup(data) {
                 - const path = data.path;
                 - if(path && path.d) {
