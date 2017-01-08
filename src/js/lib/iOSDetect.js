@@ -9,7 +9,7 @@ function iOS() {
   ];
   if (!!navigator.platform) {
     while (iDevices.length) {
-      if (navigator.platform === iDevices.pop()){ return true; }
+      return navigator.platform === iDevices.pop()
     }
   }
   return false;

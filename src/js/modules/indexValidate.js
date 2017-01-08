@@ -1,5 +1,5 @@
 //=require ../lib/jquery.validate.min.js
-$("#newsletter").validate({
+$("#form").validate({
 	ignore: ".ignore",
 	rules: {
 		email: {
@@ -13,9 +13,9 @@ $("#newsletter").validate({
 
     	$(element).addClass(errorClass);
 
-    	if($('#newsletter .select.error, #newsletter .input.error').length) {
-    		if(!$('.newsletter__errors').hasClass('is-active')) {
-				$('.newsletter__errors').removeClass('is-active');
+    	if($('#form .select.error, #form .input.error').length) {
+    		if(!$('.form__errors').hasClass('is-active')) {
+				$('.form__errors').removeClass('is-active');
 	    	}
     	}
 
@@ -24,9 +24,9 @@ $("#newsletter").validate({
 
     	$(element).removeClass(errorClass);
 
-    	if(!$('#newsletter .select.error, #newsletter .input.error').length) {
-    		if($('.newsletter__errors').hasClass('is-active')) {
-				$('.newsletter__errors').removeClass('is-active');
+    	if(!$('#form .select.error, #form .input.error').length) {
+    		if($('.form__errors').hasClass('is-active')) {
+				$('.form__errors').removeClass('is-active');
 	    	}
     	}
 
@@ -34,27 +34,27 @@ $("#newsletter").validate({
     invalidHandler: function() {
 
    		// dodajemy error
-		if(!$('.newsletter__errors').hasClass('is-active')) {
-			$('.newsletter__errors').addClass('is-active');
+		if(!$('.form__errors').hasClass('is-active')) {
+			$('.form__errors').addClass('is-active');
 		}
 
     },
 	submitHandler: function(form) {
-		jQuery.ajax({
+		$.ajax({
 			method: "GET",
-			url: "/contact_me.php?"+jQuery('#newsletter').serialize()
+			url: "/contact_me.php?"+$('#form').serialize()
 		});
-		$('.newsletter__success').addClass('is-active');
+		$('.form__success').addClass('is-active');
 		setTimeout(function() {
-			$('#newsletter')[0].reset();
+			$('#form')[0].reset();
 			setTimeout(function () {
-				$('.newsletter__success').removeClass('is-active');
+				$('.form__success').removeClass('is-active');
 			}, 1000);
 		}, 4000);
 	}
 });
-$('#newsletter .hide-error').click(function() {
-	$('.newsletter__errors').removeClass('is-active');
+$('#form .hide-error').click(function() {
+	$('.form__errors').removeClass('is-active');
 });
 
 

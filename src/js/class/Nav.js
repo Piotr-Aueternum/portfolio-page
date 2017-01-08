@@ -1,13 +1,14 @@
 function Nav(nav) {
-  this.nav = $(nav);
-  this.toggle = $(this.nav).find(nav + '__toggle');
-  this.list = $(this.nav).find(nav + '__list');
-  $(this.toggle).on('click', () => {
+  this.nav = document.querySelector(nav);
+  this.toggle = this.nav.querySelector(nav + '__toggle');
+  this.list = this.nav.querySelector(nav + '__list');
+
+  this.toggle.addEventListener('click', () => {
     this.expand();
   });
-}
 
-Nav.prototype.expand = function() {
-  $(this.list).toggleClass('active');
-  $(this.toggle).toggleClass('active');
+  this.expand = function() {
+    this.list.classList.toggle('active');
+    this.toggle.classList.toggle('active');
+  }
 }
