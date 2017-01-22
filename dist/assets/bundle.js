@@ -3109,14 +3109,7 @@ class Ball {
     this.vy = vy;
     this.radius = radius;
     this.color = color;
-    this.draw = this.draw.bind(this)
-  }
-  init() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
-    ctx.closePath();
-    ctx.fillStyle = this.color;
-    ctx.fill();
+    this.draw = this.draw.bind(this);
   }
   draw() {
     ctx.beginPath();
@@ -3128,10 +3121,10 @@ class Ball {
   move() {
     this.x = this.x + this.vx;
     this.y += this.vy;
-    if (this.y + this.vy > canvas.height - 10 || this.y + this.vy < 0) {
+    if (this.y + this.vy > canvas.height || this.y + this.vy < 0) {
       this.vy = -this.vy;
     }
-    if (this.x + this.vx > canvas.width - 10 || this.x + this.vx < 0) {
+    if (this.x + this.vx > canvas.width || this.x + this.vx < 0) {
       this.vx = -this.vx;
     }
     raf = window.requestAnimationFrame(this.draw);
@@ -3145,14 +3138,17 @@ function rand(min, max) {
 let ballSet = [];
 for(let i = 1; i<10 * rand(20, 50); i++) {
   balld = new Ball({
-    x: 100 * Math.random() + 1,
-    y: 100 * Math.random() + 1,
-    vx: 2 * Math.random() + 1,
-    vy: 2 * Math.random() + 1,
-    radius: 10 * Math.random() + 1,
-    color: 'rgba(148, 136, 228, 0.22)'
+    x: canvas.width * Math.random() + 1,
+    y: canvas.height * Math.random() + 1,
+    vx: 1 * Math.random() + 1,
+    vy: 1 * Math.random() + 1,
+    radius: 50 * Math.random() + 1,
+    color: `rgba(
+    ${rand(170, 255)},
+    ${rand(170, 255)},
+    ${rand(170, 255)},
+    0.4)`
   });
-  balld.init();
   ballSet.push(balld);
 }
 function main() {

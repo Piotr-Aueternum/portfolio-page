@@ -73,7 +73,7 @@ gulp.task('jshint', function() {
 gulp.task('default', ['watch'], function() {
     console.log(consoleTime() + 'Go!');
     bs.init({
-        server: "../dist",
+        server: __dirName,
         open: false
     });
     gulp.watch("src/css/**/*.styl", ['stylus']);
