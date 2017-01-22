@@ -1,0 +1,141 @@
+{
+  "skills": [
+    {
+      "skillsHeading": "Technologie",
+      "skillsGroup": [
+        {
+          "skillsTech": "HTML5",
+          "skillsDesc": [
+            {
+              "techHeading": "Pug(Jade)",
+              "techDesc": "Przyśpiesza moją pracę, pilnuje spójności kodu, pozwala zorganizować lepiej kod źródłowy."
+            },
+            {
+              "techHeading": "Semantyka",
+              "techDesc": "W projektach stosuję znaczniki HTML5, aby&nbsp;kod był bardziej czytelny i lepiej idenksowany przez przeglądarki."
+            }
+          ]
+        },
+        {
+          "skillsTech": "CSS3",
+          "skillsDesc": [
+            {
+              "techHeading": "Stylus",
+              "techDesc": "Świeży i potężny preprocesor CSS, zawiera wiele smaczków których brakuje konkurencji."
+            },
+            {
+              "techHeading": "Sass/SCSS",
+              "techDesc": "Preprocesor do organizacji i przyśpieszenia pracy, jeden z najbardziej popularnych."
+            },
+            {
+              "techHeading": "Less",
+              "techDesc": "Super lekki i&nbsp;szybki preprocesor z ciekawymi rozwiązaniami jak CSR prefix."
+            },
+            {
+              "techHeading": "BEM",
+              "techDesc": "BEM pozwala mi na pisanie dobrze skalującej się architektury CSS."
+            },
+            {
+              "techHeading": "Animacje",
+              "techDesc": "Lubię tworzyć minimalistyczne animacje 2D/3D z użyciem CSS przy użyciu transformacji, co&nbsp;przekłada&nbsp;się na&nbsp;bardziej optymalną animacje."
+            }
+          ]
+        },
+        {
+          "skillsTech": "JS",
+          "skillsDesc": [
+            {
+              "techHeading": "d3.js",
+              "techDesc": "Zaoszczędzenie czasu poprzez szybkie tworzenie animacji na stronie i łatwego ustawiania sekwencji przy animacjach."
+            },
+            {
+              "techHeading": "bodymovin",
+              "techDesc": "Podpinanie otrzymanych animacji z&nbsp;pakietu Adobe After Effects i&nbsp;wyeksportowanych za&nbsp;pomocą bodymovin."
+            },
+            {
+              "techHeading": "ES5",
+              "techDesc": "Znajomość ES5 pozwala mi na&nbsp;pisanie kodu działającego w&nbsp;wielu popularnych przeglądarkach."
+            },
+            {
+              "techHeading": "ES6",
+              "techDesc": "Lepsza organizacja kodu, większe możliwość zaoszczędzenia czasu."
+            }
+          ]
+        },
+        {
+          "skillsTech": "Automatyzacja",
+          "skillsDesc": [
+            {
+              "techHeading": "Gulp",
+              "techDesc": "Dobrze zaznajomiłem się z&nbsp;Gulpem, na swoje potrzeby tworze dedykowane konfiguracje do projektów."
+            },
+            {
+              "techHeading": "Grunt",
+              "techDesc": "Pierwszy taskrunner jaki poznałem wraz z generatorem Yeoman."
+            },
+            {
+              "techHeading": "Webpack@beta",
+              "techDesc": "Konfiguracja środowiska bundlera pod&nbsp;ES6."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skillsHeading": "Miałem do czynienia",
+      "skillsGroup": [
+        {
+          "skillsTech": "JS",
+          "skillsDesc": [
+            {
+              "techHeading": "React",
+              "techDesc": "Poznałem działanie i założenia biblioteki od Facebooka, wiem jakie korzyści i wady niesie jego użytkowanie."
+            },
+            {
+              "techHeading": "Vue",
+              "techDesc": "Lekka i przyjemna biblioteka do&nbsp;tworzenia warstwy widoku w&nbsp;aplikacji, używająca szablonów."
+            },
+            {
+              "techHeading": "Webpack",
+              "techDesc": "Stworzenie prostego configu z&nbsp;Reactem i Babelem."
+            }
+          ]
+        },
+        {
+          "skillsTech": "PHP",
+          "skillsDesc": [
+            {
+              "techHeading": "Magento 1.x",
+              "techDesc": "Stworzenie struktury pod Magento i wdrożenie jej, podstawowa funkcjonalność."
+            },
+            {
+              "techHeading": "Contao 3.x",
+              "techDesc": "Zaznajomienie się ze strukturą i&nbsp;panel adminem."
+            },
+            {
+              "techHeading": "Wordpress",
+              "techDesc": "Znajomość panelu admina, lokalizacji plików."
+            },
+            {
+              "techHeading": "Twig",
+              "techDesc": "Współpraca ze wzorcem Twig podczas poznawania Symfony 2."
+            }
+          ]
+        },
+        {
+          "skillsTech": "Pozostałe",
+          "skillsDesc": [
+            {
+              "techHeading": "SQL",
+              "techDesc": "Tworzenie prostych zapytań do&nbsp;bazy SQL z poziomu kodu PHP i terminala."
+            },
+            {
+              "techHeading": "Markdown",
+              "techDesc": "Poznałem go podczas tworzenia treści na mediawiki i&nbsp;dokumentacji na github.com."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

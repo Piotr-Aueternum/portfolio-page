@@ -1,78 +1,47 @@
 include ./mixins/tooltip
 doctype html
 html
-	include ./partials/head
-	body
-		include ./partials/header
-		main#fullpage
-			section.section.fullPage.fullPage--intro(data-anchor='intro')
-				.container
-					h1.fullPage__heading Frontend Developer
-					h2.fullPage__lead Piotr Sochacz
-			section.section.fullPage.fullPage--about(data-anchor='about')
-				.container
-					h2.fullPage__heading O mnie
-					.fullPage__content Pasjonuję się frontendem, jego nauka przychodzi mi łatwo i przyjemnie. <br>Przy tworzeniu skupiam się na tym aby jak najlepiej zbudować stronę,<br> przez co łatwo można rozbudować projekt o kolejne komponenty.<br> Dzięki solidnej strukturze wszystko komponuje się w stabilną całość.
-					.fullPage__content Frontendu zacząłem się uczyć od końcówki października 2015 roku.<br> Poznałem wiele przydatnych technologii i zdobyłem doświadczenie<br> w realizacji projektów. Zamierzam dalej się rozwijać w tym kierunku,<br> jest to moje hobby i praca, lubię tworzyć i widzieć jak projekt się rozwija.
-			section.section.fullPage.fullPage--skills(data-anchor='skills')
-				.container
-					h2.fullPage__heading Technologie
-					.fullPage__grid
-						.skills
-							.skills__col
-								h3 HTML5
-								ul
-									+tooltip('Pug(Jade)', 'Przyśpiesza moją pracę, pilnuje spójności kodu, pozwala zorganizować lepiej kod źródłowy.')
-									+tooltip('Semantyka', 'W projektach stosuję znaczniki HTML5, aby&nbsp;kod był bardziej czytelny i lepiej idenksowany przez przeglądarki.')
-							.skills__col
-								h3 CSS3
-								ul
-									+tooltip('Stylus', 'Świeży i potężny preprocesor CSS, zawiera wiele smaczków których brakuje konkurencji.')
-									+tooltip('Sass/SCSS', 'Preprocesor do organizacji i przyśpieszenia pracy, jeden z najbardziej popularnych.')
-									+tooltip('Less', 'Super lekki i&nbsp;szybki preprocesor z ciekawymi rozwiązaniami.')
-									+tooltip('BEM', 'BEM pozwala mi na pisanie dobrze skalującej się architektury CSS.')
-									+tooltip('Animacje', 'Lubię tworzyć minimalistyczne animacje 2D/3D z użyciem CSS przy użyciu transformacji, co&nbsp;przekłada&nbsp;się na&nbsp;bardziej optymalną animacje.')
-							.skills__col
-								h3 JS
-								ul
-									+tooltip('d3.js', 'Zaoszczędzenie czasu poprzez szybkie tworzenie animacji na stronie i łatwego ustawiania opóźnień przy animacjach.')
-									+tooltip('snap.svg', 'Przydatne narzędzie do pracy przy technologii animowania SVG.')
-									+tooltip('bodymovin', 'Podpinanie otrzymanych animacji z&nbsp;pakietu Adobe After Effects i&nbsp;wyeksportowanych za&nbsp;pomocą bodymovin.')
-									+tooltip('ES5', 'Znajomość ES5 pozwala mi na&nbsp;pisanie kodu działającego w&nbsp;wielu popularnych przeglądarkach.')
-									+tooltip('ES6', 'Dzięki ES6 mogę pisać przystępny i uporządkowany kod.')
-							.skills__col
-								h3 Automatyzacja
-								ul
-									+tooltip('Gulp', 'Dobrze zaznajomiłem się z&nbsp;Gulpem, na swoje potrzeby tworze dedykowane konfiguracje do projektów.')
-									+tooltip('Grunt', 'Pierwszy taskrunner jaki poznałem wraz z generatorem Yeoman.')
-									+tooltip('Webpack@beta', 'Konfiguracja środowiska bundlera pod&nbsp;ES6.')
-					h2.fullPage__heading Miałem do czynienia
-					.skills
-						.skills__col
-							h3 JS
-							ul
-								+tooltip('React', 'Popularna biblioteka od Facebooka do tworzenia łatwiejszego tworzenia warstwy widoku w projekcie.')
-								+tooltip('Vue', 'Lekka i przyjemna biblioteka do&nbsp;tworzenia warstwy widoku w&nbsp;aplikacji.')
-								+tooltip('Webpack', 'Stworzenie prostego configu z&nbsp;Reactem i Babelem.')
-						.skills__col
-							h3 PHP
-							ul
-								+tooltip('Magento 1.x', 'Stworzenie struktury pod Magento i wdrożenie jej, podstawowa funkcjonalność.')
-								+tooltip('Contao 3.x', 'Zaznajomienie się ze strukturą i&nbsp;panel adminem.')
-								+tooltip('Wordpress', 'Znajomość panelu admina, lokalizacji plików.')
-								+tooltip('Twig', 'Współpraca ze wzorcem Twig podczas poznawania Symfony 2.')
-						.skills__col
-							h3 Pozostałe
-							ul
-								+tooltip('SQL', 'Tworzenie prostych zapytań do&nbsp;bazy SQL z poziomu kodu PHP.')
-								+tooltip('Markdown', 'Poznałem go podczas tworzenia treści na mediawiki i&nbsp;dokumentacji na github.com.')
-			section.section.fullPage.fullPage--projects(data-anchor='projects')
-				.container
-					h2.fullPage__heading Zakres prac
-					.fullPage__content Piotr Sochacz
-			section.section.fullPage.fullPage--contact(data-anchor='contact')
-				.container
-					h2.fullPage__heading Kontakt
-					.fullPage__content Piotr Sochacz
-		include ./partials/footer
-		include ./partials/foot
+  include ./partials/head
+  body
+    include ./partials/header
+    main#fullpage
+      section.section(data-anchor='intro')
+        canvas#dots
+        .container
+          .intro.intro--home
+            h1.intro__heading Frontend Developer
+            h2.intro__lead Piotr Sochacz
+      section.section(data-anchor='about')
+        .container
+          .intro.intro--about
+            h2.intro__heading O mnie
+            .intro__content Pasjonuję się frontendem, jego nauka przychodzi mi łatwo i przyjemnie. <br>Przy tworzeniu skupiam się na tym aby jak najlepiej zbudować stronę,<br> przez co łatwo można rozbudować projekt o kolejne komponenty.<br> Dzięki solidnej strukturze wszystko komponuje się w stabilną całość.
+            .intro__content Frontendu zacząłem się uczyć od końcówki października 2015 roku.<br> Poznałem wiele przydatnych technologii i zdobyłem doświadczenie<br> w realizacji projektów. Zamierzam dalej się rozwijać w tym kierunku,<br> jest to moje hobby i praca, lubię tworzyć i widzieć jak projekt się rozwija.
+      section.section(data-anchor='skills')
+        .container
+          .intro.intro--skills
+            - const skills = require(__dirname + '/src/data/skills/skills.json').skills;
+            each skill in skills
+              h2.intro__heading #{skill.skillsHeading}
+              .skills
+                - const groups = skill.skillsGroup;
+                each group in groups
+                  .skills__col
+                    h3 #{group.skillsTech}
+                    ul
+                      - const techs = group.skillsDesc;
+                      each tech in techs
+                        li
+                          +tooltip(tech.techHeading, tech.techDesc, 'tooltip')
+      section.section(data-anchor='projects')
+        .container
+          .intro.intro--projects
+            h2.intro__heading Zakres prac
+            .intro__content Piotr Sochacz
+      section.section(data-anchor='contact')
+        .container
+          .intro.intro--contact
+            h2.intro__heading Kontakt
+            .intro__content Piotr Sochacz
+    include ./partials/footer
+    include ./partials/foot

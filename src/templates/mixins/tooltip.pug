@@ -1,6 +1,6 @@
-mixin tooltip(title, content)
-	li.tooltip
-		.tooltip__init= title
-		p.tooltip__body
-			span.tooltip__title= title
+mixin tooltip(title, content, className)
+	div(class=className)
+		h4(class=className + '__heading')= title
+		p(class=className + '__description')
+			span(class=className + '__lead')= title
 			| !{content}

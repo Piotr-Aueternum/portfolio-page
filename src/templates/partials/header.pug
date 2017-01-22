@@ -2,7 +2,7 @@ header.header
   nav.header__nav.nav
     ul.nav__list.nav-list
       - const icons = require(__dirname + '/src/data/header-svg/header-svg.json').icons;
-      - for(const icon of icons) {
+      each icon in icons
         - const anchor = icon.svg.anchor;
         li.nav-list__item
           a.nav-list__link(href=anchor.href, title=anchor.title)
@@ -14,31 +14,25 @@ header.header
               width=attr.width || 0,
               viewBox=attr.viewBox || 0
             )
-              - function createGroup(data) {
+              mixin createGroup(data)
                 - const path = data.path;
-                - if(path && path.d) {
+                if path && path.d
                   path(d!=path.d)
-                - }
-                - if(data.g) {
+
+                if data.g
                   g
-                    - for(const g of data.g) {
-                      -if(g.g) {
-                        - for(const gn of g.g) {
+                    each g in data.g
+                      if g.g
+                        each gn in g.g
                           g
-                            - createGroup(gn);
-                        - }
-                      - }
+                            +createGroup(gn)
+                            
                       - const path = g.path;
-                      -if(path && path.d) {
+                      if path && path.d
                         path(d!=path.d)
-                      - }
+
                       - const circle = g.circle;
-                      -if(circle && circle.cx && circle.cy && circle.r) {
+                      if circle && circle.cx && circle.cy && circle.r
                         circle(cx!=circle.cx, cy!=circle.cy, r!=circle.r)
-                      - }
-                    - }
-                - }
-              - }
-              - createGroup(icon.svg)
-      - }
+              +createGroup(icon.svg)
     button.nav__toggle
