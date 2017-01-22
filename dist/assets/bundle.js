@@ -3100,16 +3100,15 @@ const canvas = document.getElementById('dots');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const ctx = canvas.getContext('2d');
-let raf;
 class Ball {
-  constructor({x, y, vx, vy, radius, color}) {
+  constructor(ctx, {x, y, vx, vy, radius, color}) {
+    this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.vx = vx;
     this.vy = vy;
     this.radius = radius;
     this.color = color;
-    this.draw = this.draw.bind(this);
   }
   draw() {
     ctx.beginPath();
@@ -3127,7 +3126,7 @@ class Ball {
     if (this.x + this.vx > canvas.width || this.x + this.vx < 0) {
       this.vx = -this.vx;
     }
-    raf = window.requestAnimationFrame(this.draw);
+    window.requestAnimationFrame(() => this.draw());
   }
 }
 function rand(min, max) {
@@ -3137,7 +3136,7 @@ function rand(min, max) {
 }
 let ballSet = [];
 for(let i = 1; i<10 * rand(20, 50); i++) {
-  balld = new Ball({
+  balld = new Ball(ctx, {
     x: canvas.width * Math.random() + 1,
     y: canvas.height * Math.random() + 1,
     vx: 1 * Math.random() + 1,
