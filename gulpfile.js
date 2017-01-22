@@ -16,7 +16,7 @@ var gulp            = require('gulp'),
       gulpPug       = require('gulp-pug'),
       htmlmin       = require('gulp-htmlmin'),
       chalk         = require('chalk');
-var __dirName = '../dist/';
+var __dirName = 'dist/';
 function consoleTime() {
     var date = new Date();
     var h = date.getHours();
