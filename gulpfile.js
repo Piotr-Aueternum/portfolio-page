@@ -15,7 +15,9 @@ var gulp            = require('gulp'),
       uglify        = require('gulp-uglify'),
       gulpPug       = require('gulp-pug'),
       htmlmin       = require('gulp-htmlmin'),
-      chalk         = require('chalk');
+      chalk         = require('chalk'),
+      webpackStream = require('webpack-stream'),
+      webpack       = require('webpack');
 var __dirName = 'dist/';
 function consoleTime() {
     var date = new Date();
@@ -63,10 +65,22 @@ gulp.task('html', function() {
     .pipe(bs.stream({once: true}));
 });
 gulp.task('jshint', function() {
-  return gulp.src('src/js/bundle.js')
+  return gulp.src('src/js/index.js')
     .pipe(plumber())
-    .pipe(include())
-    // .pipe(uglify())
+    .pipe(webpackStream({
+      output: {
+        filename: 'bundle.js',
+      },
+      module: {
+        loaders: [
+          {
+            test: /\.js$/,
+            loader: 'eslint-loader',
+            exclude: /node_modules/,
+          }
+        ],
+      },
+    }, webpack))
     .pipe(plumber.stop())
     .pipe(gulp.dest(__dirName + 'assets'));
 });
