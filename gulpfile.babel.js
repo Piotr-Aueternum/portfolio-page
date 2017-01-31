@@ -1,40 +1,30 @@
+import gulp from 'gulp';
+import bs from 'browser-sync';
+import rename from 'gulp-rename';
+import spritesmith from 'gulp.spritesmith';
+import merge from 'merge-stream';
+import stylus from 'gulp-stylus';
+import autoprefixer from 'gulp-autoprefixer';
+import gulpCleanCSS from 'gulp-clean-css';
+import gulpPug from 'gulp-pug';
+import plumber from 'gulp-plumber';
+import gulpHtmlmin from 'gulp-htmlmin';
+import chalk from 'chalk';
+import webpackStream from 'webpack-stream';
+import webpack from 'webpack';
+import consoleTime from './task/consoleTime';
+
 global.require = require;
 global.__dirname = __dirname;
-                      require('es6-promise').polyfill();
-var gulp            = require('gulp'),
-      include       = require('gulp-include'),
-      bs            = require('browser-sync').create(),
-      rename        = require('gulp-rename'),
-      plumber       = require('gulp-plumber'),
-      spritesmith   = require('gulp.spritesmith'),
-      merge         = require('merge-stream'),
-      stylint       = require('gulp-stylint'),
-      stylus        = require('gulp-stylus'),
-      autoprefixer  = require('gulp-autoprefixer'),
-      cleanCSS      = require('gulp-clean-css');
-      uglify        = require('gulp-uglify'),
-      gulpPug       = require('gulp-pug'),
-      htmlmin       = require('gulp-htmlmin'),
-      chalk         = require('chalk'),
-      webpackStream = require('webpack-stream'),
-      webpack       = require('webpack');
-var __dirName = 'dist/';
-function consoleTime() {
-    var date = new Date();
-    var h = date.getHours();
-    h = (h < 10 ? "0" : "") + h;
-    var m  = date.getMinutes();
-    m = (m < 10 ? "0" : "") + m;
-    var s  = date.getSeconds();
-    s = (s < 10 ? "0" : "") + s;
-    return "[" + chalk.gray(h + ":" + m + ":" + s) + "] ";
-}
-gulp.task('image', function () {
+
+const __dirName = 'dist/';
+
+gulp.task('image', () => {
   gulp.src('src/img/**')
     .pipe(gulp.dest(__dirName + 'assets/img'));
 });
 
-gulp.task('sprite', function () {
+gulp.task('sprite', () => {
 
   var spriteData = gulp.src('src/css/sprites/*.png')
     .pipe(spritesmith({
@@ -53,18 +43,17 @@ gulp.task('sprite', function () {
 
   return merge(imgStream, cssStream);
 });
-gulp.task('html', function() {
+gulp.task('html', () => {
   return gulp.src('src/templates/*.pug')
     .pipe(plumber())
     .pipe(gulpPug({
       pretty: true
     }))
-    // .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(plumber.stop())
     .pipe(gulp.dest(__dirName))
     .pipe(bs.stream({once: true}));
 });
-gulp.task('jshint', function() {
+gulp.task('webpack', () => {
   return gulp.src('src/js/index.js')
     .pipe(plumber())
     .pipe(webpackStream({
@@ -80,26 +69,29 @@ gulp.task('jshint', function() {
           }
         ],
       },
-    }, webpack))
+    }, webpack, (err, stats) => {
+      console.log(stats.toString({ colors: true }));
+    }))
     .pipe(plumber.stop())
     .pipe(gulp.dest(__dirName + 'assets'));
 });
-gulp.task('default', ['watch'], function() {
+gulp.task('default', ['watch'], () => {
     console.log(consoleTime() + 'Go!');
     bs.init({
         server: __dirName,
         open: false
     });
     gulp.watch("src/css/**/*.styl", ['stylus']);
-    gulp.watch("src/js/**/*", ['jshint']).on('change', bs.reload);
+    gulp.watch("src/js/**/*", ['webpack']);
+    gulp.watch("dist/assets/**/*.js").on('change', bs.reload);
 });
-gulp.task('stylus', function() {
+gulp.task('stylus', () => {
   return gulp.src('src/css/style.styl')
     .pipe(plumber())
     .pipe(stylus())
     .pipe(plumber.stop())
     .pipe(autoprefixer({ browsers: ['> 1%', 'IE 7'], cascade: false }))
-    .pipe(cleanCSS({debug: true}, function(details) {
+    .pipe(gulpCleanCSS({debug: true}, details => {
       console.log(consoleTime() + details.name + ' original size ' + chalk.cyan(((details.stats.originalSize)/1024).toPrecision(4))+chalk.bold("KB"));
       console.log(consoleTime() + details.name + ' minified size ' + chalk.cyan(((details.stats.minifiedSize)/1024).toPrecision(4))+chalk.bold("KB"));
       console.log(consoleTime() + "Saved "+ chalk.yellow.bold((100 / details.stats.originalSize * (details.stats.originalSize - details.stats.minifiedSize)).toPrecision(4) +"%")+", "+chalk.cyan(((details.stats.originalSize - details.stats.minifiedSize)/1024).toPrecision(4))+chalk.bold("KB"));
@@ -107,8 +99,8 @@ gulp.task('stylus', function() {
     .pipe(gulp.dest(__dirName + 'assets'))
     .pipe(bs.stream({match: "**/*.css"}));
 });
-gulp.task('watch', function() {
-  gulp.watch('src/js/**/*.js', ['jshint']);
+gulp.task('watch', () => {
+  gulp.watch('src/js/**/*.js', ['webpack']);
   gulp.watch('src/css/**/*.styl', ['stylus']);
   gulp.watch('src/img/**', ['image']);
   gulp.watch('src/css/sprites/**', ['sprite']);
