@@ -1,1 +1,0 @@
-const cookie = new Cookie();

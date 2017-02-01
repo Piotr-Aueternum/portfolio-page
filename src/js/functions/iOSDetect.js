@@ -1,4 +1,4 @@
-function iOS() {
+export default function iOS() {
   var iDevices = [
     'iPad Simulator',
     'iPhone Simulator',
@@ -9,7 +9,7 @@ function iOS() {
   ];
   if (!!navigator.platform) {
     while (iDevices.length) {
-      return navigator.platform === iDevices.pop()
+      return navigator.platform === iDevices.pop();
     }
   }
   return false;

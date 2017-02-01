@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -116,7 +116,34 @@ class Ball {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__class_Nav__ = __webpack_require__(2);
+/* harmony export (immutable) */ __webpack_exports__["a"] = main;
+function main(fn, fps = 30) {
+  setTimeout(() => {
+    fn();
+    main(fn, fps);
+  }, 1000 / fps);
+}
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = randomNumber;
+function randomNumber(getMin, getMax) {
+  const min = Math.ceil(getMin);
+  const max = Math.floor(getMax);
+  return Math.floor(Math.random() * ((max - min) + 1)) + min;
+}
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__class_Nav__ = __webpack_require__(4);
 
 
 const nav = new __WEBPACK_IMPORTED_MODULE_0__class_Nav__["a" /* default */]('.nav');
@@ -125,7 +152,7 @@ const nav = new __WEBPACK_IMPORTED_MODULE_0__class_Nav__["a" /* default */]('.na
 
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -150,29 +177,30 @@ class Nav {
 
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_nav__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_nav__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__class_Ball__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__functions_randomNumber__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__functions_main__ = __webpack_require__(1);
+
+
 
 
 
 __WEBPACK_IMPORTED_MODULE_0__modules_nav__["a" /* default */].init();
+
 const canvas = document.getElementById('dots');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const ctx = canvas.getContext('2d');
-function rand(getMin, getMax) {
-  const min = Math.ceil(getMin);
-  const max = Math.floor(getMax);
-  return Math.floor(Math.random() * ((max - min) + 1)) + min;
-}
+
 const ballSet = [];
-for (let i = 1; i < 10 * rand(20, 50); i += 1) {
-  const balld = new __WEBPACK_IMPORTED_MODULE_1__class_Ball__["a" /* default */]({
+for (let i = 1; i < 10 * __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__functions_randomNumber__["a" /* default */])(20, 50); i += 1) {
+  const ball = new __WEBPACK_IMPORTED_MODULE_1__class_Ball__["a" /* default */]({
     ctx,
     canvas,
     pos: {
@@ -186,23 +214,21 @@ for (let i = 1; i < 10 * rand(20, 50); i += 1) {
     property: {
       radius: 50 * Math.random(),
       color: `rgba(
-        ${rand(170, 255)},
-        ${rand(170, 255)},
-        ${rand(170, 255)},
+        ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__functions_randomNumber__["a" /* default */])(170, 255)},
+        ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__functions_randomNumber__["a" /* default */])(170, 255)},
+        ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__functions_randomNumber__["a" /* default */])(170, 255)},
         0.4)`,
     },
   });
-  ballSet.push(balld);
+  ballSet.push(ball);
 }
-function main() {
+
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__functions_main__["a" /* default */])(() => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  setTimeout(() => {
-    ballSet.forEach((el) => {
-      el.move();
-    });
-    main();
-  }, 1000 / 30);
-}main();
+  ballSet.forEach((el) => {
+    el.move();
+  });
+}, 30);
 
 
 /***/ })

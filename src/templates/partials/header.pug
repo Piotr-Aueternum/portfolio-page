@@ -1,5 +1,6 @@
 header.header
   nav.header__nav.nav
+    button.nav__toggle
     ul.nav__list.nav-list
       - const icons = require(__dirname + '/src/data/header-svg/header-svg.json').icons;
       each icon in icons
@@ -35,4 +36,3 @@ header.header
                       if circle && circle.cx && circle.cy && circle.r
                         circle(cx!=circle.cx, cy!=circle.cy, r!=circle.r)
               +createGroup(icon.svg)
-    button.nav__toggle
