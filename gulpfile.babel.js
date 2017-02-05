@@ -8,7 +8,7 @@ import css from './gulp/task/css';
 import js from './gulp/task/js';
 
 global.require = require;
-global.__dirname = __dirname;
+global.dirname = __dirname;
 
 gulp.task('image', () => {
   image();
@@ -31,12 +31,12 @@ gulp.task('sprite', () => {
 });
 
 gulp.task('default', ['watch'], () => {
-    console.log(consoleTime() + 'Frontend Developer Boilerplate by https://github.com/Piotr-Aueternum');
-    bs.init({
-        server: 'dist',
-        open: false
-    });
-    gulp.watch("dist/assets/**/*.js").on('change', bs.reload);
+  console.log(`${consoleTime()} Frontend Developer Boilerplate by https://github.com/Piotr-Aueternum`);
+  bs.init({
+    server: 'dist',
+    open: false,
+  });
+  gulp.watch('dist/assets/**/*.js').on('change', bs.reload);
 });
 
 gulp.task('watch', () => {

@@ -1,10 +1,10 @@
 {
-  "name": "Piotr-Aueternum",
+  "name": "piotr-aueternum",
   "version": "1.0.0",
   "description": "Boilerplate",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "hello world"
+    "gulp": "gulp"
   },
   "author": "",
   "license": "ISC",

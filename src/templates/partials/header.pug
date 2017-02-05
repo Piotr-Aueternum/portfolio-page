@@ -2,7 +2,7 @@ header.header
   nav.header__nav.nav
     button.nav__toggle
     ul.nav__list.nav-list
-      - const icons = require(__dirname + '/src/data/header-svg/header-svg.json').icons;
+      - const icons = require(`${dirname}/src/data/header-svg/header-svg.json`).icons;
       each icon in icons
         - const anchor = icon.svg.anchor;
         li.nav-list__item

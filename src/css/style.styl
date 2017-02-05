@@ -2,7 +2,7 @@
   * TOOLS 			- MIXINS, FUNCTIONS
   * GENERIC 		- RESETS, NORMALIZE, BOX-SIZING
   * ELEMENTS 		- BASE HTML H1, A, BUTTON, INPUT ETC.
-  * OBJECTS 		- CLASS-BASSED SELECTORS W/O DECORATIONS
+  * OBJECTS 		- CLASS-BASSED SELECTORS
   * COMPONENTS 	- UI COMPONENTS MIX OF OBJECTS AND COMPONENTS
   * TRUMPS 			- UTILITY LIKE CLEARFIX OR PULL-RIGHT(FLOAT: RIGHT)
   * THEME 			- STYLING FOR OBJECTS AND COMPONENTS
@@ -15,32 +15,27 @@
 @import 'tools/sprite.css'
 
 @import 'generic/normalize'
-@import 'generic/jquery.fullPage'
 @import 'generic/reset'
 @import 'generic/box-sizing'
 @import 'generic/font-smooth'
 @import 'generic/font-family'
 @import 'generic/rem-scale'
 
-@import 'elements/header'
-// @import 'elements/kbd'
+// @import 'elements/el'
 
-// @import 'objects/icon'
+@import 'objects/icon'
 
+@import 'components/nav-list'
 @import 'components/nav'
-@import 'components/introSection'
-@import 'components/aboutSection'
+@import 'components/header'
 @import 'components/skills'
 @import 'components/tooltip'
 @import 'components/intro'
+@import 'components/fullpage'
 
 @import 'trumps/container'
 
 canvas
-  width 100%
-  height 100%
   position absolute
   top 0
   left 0
-  object-fit cover
-  object-position center

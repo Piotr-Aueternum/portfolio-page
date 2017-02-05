@@ -2,7 +2,8 @@
 	"globals": {
 		"document": true,
     "window": true,
-		"DOMParser": true
+		"DOMParser": true,
+    "CanvasRenderingContext2D": true
 	},
   "extends": "airbnb",
   "rules": {

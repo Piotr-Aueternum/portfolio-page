@@ -15,12 +15,12 @@ html
         .container
           .intro.intro--about
             h2.intro__heading O mnie
-            .intro__content
+            p.intro__content
               | Pasjonuję się frontendem, jego nauka przychodzi mi łatwo i przyjemnie.
               <br>Przy tworzeniu skupiam się na tym aby jak najlepiej zbudować stronę,
               <br> przez co łatwo można rozbudować projekt o kolejne komponenty.
               <br> Dzięki solidnej strukturze wszystko komponuje się w stabilną całość.
-            .intro__content
+            p.intro__content
               | Frontendu zacząłem się uczyć od końcówki października 2015 roku.
               <br> Poznałem wiele przydatnych technologii i zdobyłem doświadczenie
               <br> w realizacji projektów. Zamierzam dalej się rozwijać w tym kierunku,
@@ -28,7 +28,7 @@ html
       section.section(data-anchor='skills')
         .container
           .intro.intro--skills
-            - const skills = require(__dirname + '/src/data/skills/skills.json').skills;
+            - const skills = require(`${dirname}/src/data/skills/skills.json`).skills;
             each skill in skills
               h2.intro__heading #{skill.skillsHeading}
               .skills

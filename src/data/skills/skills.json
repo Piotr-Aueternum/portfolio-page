@@ -20,24 +20,16 @@
           "skillsTech": "CSS3",
           "skillsDesc": [
             {
-              "techHeading": "Stylus",
-              "techDesc": "Świeży i potężny preprocesor CSS, zawiera wiele smaczków których brakuje konkurencji."
+              "techHeading": "Preprocesory",
+              "techDesc": "Podczas tworzenia korzystam z preprocesorów takich jak Sass, SCSS, Less i Stylus. Preferuję czystą składnię z tego powodu najlepiej pisze mi się w Stylusie, w pozostałych preprocesorach czuje się równie swobodnie."
             },
             {
-              "techHeading": "Sass/SCSS",
-              "techDesc": "Preprocesor do organizacji i przyśpieszenia pracy, jeden z najbardziej popularnych."
-            },
-            {
-              "techHeading": "Less",
-              "techDesc": "Super lekki i&nbsp;szybki preprocesor z ciekawymi rozwiązaniami jak CSR prefix."
-            },
-            {
-              "techHeading": "BEM",
-              "techDesc": "BEM pozwala mi na pisanie dobrze skalującej się architektury CSS."
+              "techHeading": "Metodologie",
+              "techDesc": "Korzystam z metodologii BEM dla lepszego zarządzania kodem i lepszego skalowania architektury CSS."
             },
             {
               "techHeading": "Animacje",
-              "techDesc": "Lubię tworzyć minimalistyczne animacje 2D/3D z użyciem CSS przy użyciu transformacji, co&nbsp;przekłada&nbsp;się na&nbsp;bardziej optymalną animacje."
+              "techDesc": "Tworzenie animacji w CSS nie sprawia mi problemów, zyskałem doświadczenie w tworzeniu i w zarządzaniu kodem animacji."
             }
           ]
         },
@@ -45,20 +37,16 @@
           "skillsTech": "JS",
           "skillsDesc": [
             {
-              "techHeading": "d3.js",
-              "techDesc": "Zaoszczędzenie czasu poprzez szybkie tworzenie animacji na stronie i łatwego ustawiania sekwencji przy animacjach."
-            },
-            {
-              "techHeading": "bodymovin",
-              "techDesc": "Podpinanie otrzymanych animacji z&nbsp;pakietu Adobe After Effects i&nbsp;wyeksportowanych za&nbsp;pomocą bodymovin."
+              "techHeading": "Animacje",
+              "techDesc": "Tworzenie animacji w JS przy użyciu bibliotek takich jak snap.svg, d3.js, bodymovin. Pozwalają na wygodniejsze ustawianie opóźnień dla animacji, dzięki kolejkowaniu w JS."
             },
             {
               "techHeading": "ES5",
-              "techDesc": "Znajomość ES5 pozwala mi na&nbsp;pisanie kodu działającego w&nbsp;wielu popularnych przeglądarkach."
+              "techDesc": "Czuje się swobodnie w&nbsp;ES5, znajomość tej wersji standardu pozwala na&nbsp;pisanie kodu działającego w&nbsp;wielu popularnych przeglądarkach."
             },
             {
               "techHeading": "ES6",
-              "techDesc": "Lepsza organizacja kodu, większe możliwość zaoszczędzenia czasu."
+              "techDesc": "Kolejna wersja standardu, która poprawia wiele rzeczy i dodaje więcej wbudowanych funkcji przyśpieszających pracę na&nbsp;kodzie."
             }
           ]
         },
@@ -70,12 +58,12 @@
               "techDesc": "Dobrze zaznajomiłem się z&nbsp;Gulpem, na swoje potrzeby tworze dedykowane konfiguracje do projektów."
             },
             {
-              "techHeading": "Grunt",
-              "techDesc": "Pierwszy taskrunner jaki poznałem wraz z generatorem Yeoman."
+              "techHeading": "Webpack",
+              "techDesc": "Konfiguracja środowiska pod&nbsp;ES6 z dodaniem loaderów np. ESLint."
             },
             {
-              "techHeading": "Webpack@beta",
-              "techDesc": "Konfiguracja środowiska bundlera pod&nbsp;ES6."
+              "techHeading": "Gulp + Webpack",
+              "techDesc": "Połączenie środowisk pozwoliło mi na połączenie plusów jednego i drugiego rozwiązania, prostotę task-runnera i zaawansowaną technikę bundle'owania plików."
             }
           ]
         }
@@ -96,8 +84,12 @@
               "techDesc": "Lekka i przyjemna biblioteka do&nbsp;tworzenia warstwy widoku w&nbsp;aplikacji, używająca szablonów."
             },
             {
-              "techHeading": "Webpack",
-              "techDesc": "Stworzenie prostego configu z&nbsp;Reactem i Babelem."
+              "techHeading": "Mustache",
+              "techDesc": "Zapoznałem się z działaniem Mustache.js, narzędziem o które się opiera znaczna ilość frameworków/bibliotek korzystających z&nbsp;szablonów."
+            },
+            {
+              "techHeading": "Grunt",
+              "techDesc": "Pierwszy taskrunner jaki poznałem wraz z generatorem Yeoman."
             }
           ]
         },
