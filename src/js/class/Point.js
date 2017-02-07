@@ -3,7 +3,7 @@ export default class Point {
     ctx,
     canvas,
     pos: { x, y },
-    velocity: { vx, vy },
+    vector: { vx, vy },
   } = {}) {
     if (ctx instanceof CanvasRenderingContext2D) {
       this.ctx = ctx;
@@ -19,14 +19,6 @@ export default class Point {
     this.y = y || 0;
     this.vx = vx || 0;
     this.vy = vy || 0;
-    this.gravity = false;
-  }
-  gravityToggle() {
-    if (this.gravity === true) {
-      this.gravity = false;
-    } else {
-      this.gravity = true;
-    }
   }
   borderPhysics() {
     if (this.y + this.vy > this.canvas.height || this.y + this.vy < 0) {

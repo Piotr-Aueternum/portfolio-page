@@ -7,7 +7,6 @@
 	},
   "extends": "airbnb",
   "rules": {
-    "func-names": ["error", "never"],
-    "linebreak-style": ["error", "windows"]
+    "func-names": ["error", "never"]
   }
 }

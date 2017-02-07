@@ -5,17 +5,18 @@ export default class Circle extends Point {
     ctx,
     canvas,
     pos: { x, y },
-    velocity: { vx, vy },
+    vector: { vx, vy },
     property: { radius, color },
   } = {}) {
     super({
       ctx,
       canvas,
       pos: { x, y },
-      velocity: { vx, vy },
+      vector: { vx, vy },
     });
     this.radius = radius;
     this.color = color;
+    this.gravity = false;
   }
   draw() {
     this.ctx.beginPath();

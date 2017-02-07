@@ -90,69 +90,82 @@ main.pause = false;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__class_Circle__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__ = __webpack_require__(6);
-/* harmony export (immutable) */ __webpack_exports__["a"] = init;
-/* harmony export (immutable) */ __webpack_exports__["b"] = draw;
-/* unused harmony export resize */
 
 
 
-let canvas;
-let ctx;
-let balls;
-function init() {
-  canvas = document.getElementById('dots');
-  canvas.width = document.body.clientWidth;
-  canvas.height = window.innerHeight;
-  ctx = canvas.getContext('2d');
-  balls = [];
-  for (let i = 1; i < Math.floor(window.innerWidth / 100) * __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(15, 25); i += 1) {
-    const ball = new __WEBPACK_IMPORTED_MODULE_0__class_Circle__["a" /* default */]({
-      ctx,
-      canvas,
-      pos: {
-        x: canvas.width * Math.random(),
-        y: canvas.height * Math.random(),
-      },
-      velocity: {
-        vx: Math.random(),
-        vy: Math.random(),
-      },
-      property: {
-        radius: 50 * Math.random(),
-        color: `rgba(
-          ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(170, 255)},
-          ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(170, 255)},
-          ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(170, 255)},
-          0.4)`,
-      },
+
+/**
+ * Select canvas html id
+ * @export
+ * @param {element.id} canvasId
+ */
+class DrawBalls {
+  constructor(canvasId, { multiply, min, max } = { multiply: 1, min: 10, max: 15 }) {
+    this.canvas = document.getElementById(canvasId);
+    this.canvasFullscreen();
+    this.ctx = this.canvas.getContext('2d');
+    this.balls = [];
+    this.min = min;
+    this.max = max;
+    this.multiply = multiply;
+    window.addEventListener('resize', () => { this.resize(); });
+    this.getBalls();
+  }
+  getBalls() {
+    const windowWidth = Math.floor(window.innerWidth / 100);
+    for (let i = 1; i < windowWidth * __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(this.min, this.max); i += 1) {
+      const size = Math.random();
+      const canvas = this.canvas;
+      const ctx = this.ctx;
+      const ball = new __WEBPACK_IMPORTED_MODULE_0__class_Circle__["a" /* default */]({
+        ctx,
+        canvas,
+        pos: {
+          x: this.canvas.width * Math.random(),
+          y: this.canvas.height * Math.random(),
+        },
+        vector: {
+          vx: 0.2 * size * this.multiply,
+          vy: 0.2 * size * this.multiply,
+        },
+        property: {
+          radius: 3 * size * this.multiply,
+          color: `rgba(
+            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(240, 255)},
+            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(240, 255)},
+            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(240, 255)},
+            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(50, 100) / 1000})`,
+        },
+      });
+      window.addEventListener('dblclick', () => {
+        if (ball.gravity === false) {
+          ball.gravity = true;
+        } else {
+          ball.gravity = false;
+        }
+      });
+      this.balls.push(ball);
+    }
+  }
+  draw() {
+    this.ctx.save();
+    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.balls.forEach((ball) => {
+      ball.move();
     });
-    canvas.addEventListener('click', () => {
-      ball.gravityToggle();
-    });
-    balls.push(ball);
+    this.ctx.restore();
+  }
+  canvasFullscreen() {
+    this.canvas.width = document.body.clientWidth;
+    this.canvas.height = window.innerHeight;
+  }
+  resize() {
+    this.draw();
   }
 }
-function draw() {
-  ctx.save();
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  balls.forEach((ball) => {
-    ball.move();
-  });
-  ctx.restore();
-}
-function resize() {
-  canvas.width = document.body.clientWidth;
-  canvas.height = window.innerHeight;
-  ctx.save();
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  balls.forEach((ball) => {
-    ball.move();
-  });
-  ctx.restore();
-}
-window.addEventListener('resize', resize, false);
+/* harmony export (immutable) */ __webpack_exports__["a"] = DrawBalls;
+
 
 
 /***/ }),
@@ -249,17 +262,18 @@ class Circle extends __WEBPACK_IMPORTED_MODULE_0__Point__["a" /* default */] {
     ctx,
     canvas,
     pos: { x, y },
-    velocity: { vx, vy },
+    vector: { vx, vy },
     property: { radius, color },
   } = {}) {
     super({
       ctx,
       canvas,
       pos: { x, y },
-      velocity: { vx, vy },
+      vector: { vx, vy },
     });
     this.radius = radius;
     this.color = color;
+    this.gravity = false;
   }
   draw() {
     this.ctx.beginPath();
@@ -315,7 +329,7 @@ class Point {
     ctx,
     canvas,
     pos: { x, y },
-    velocity: { vx, vy },
+    vector: { vx, vy },
   } = {}) {
     if (ctx instanceof CanvasRenderingContext2D) {
       this.ctx = ctx;
@@ -331,14 +345,6 @@ class Point {
     this.y = y || 0;
     this.vx = vx || 0;
     this.vy = vy || 0;
-    this.gravity = false;
-  }
-  gravityToggle() {
-    if (this.gravity === true) {
-      this.gravity = false;
-    } else {
-      this.gravity = true;
-    }
   }
   borderPhysics() {
     if (this.y + this.vy > this.canvas.height || this.y + this.vy < 0) {
@@ -375,40 +381,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__functions_main__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_initNav__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_initNav___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__modules_initNav__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_drawBalls__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_DrawBalls__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_fullpage__ = __webpack_require__(2);
 
 
 
 
 
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__modules_fullpage__["a" /* default */])({
-  container: 'fullpage',
-  section: '.section',
-  delay: 700,
-  onSlide(index) {
-    if (index === 0) {
-      if (__WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause === true) {
-        __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = false;
-      } else {
-        __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = true;
+if (window.matchMedia(('(min-width: 991px)').matches)) {
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__modules_fullpage__["a" /* default */])({
+    container: 'fullpage',
+    section: '.section',
+    delay: 700,
+    onSlide(index) {
+      if (index === 0) {
+        if (__WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause === true) {
+          __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = false;
+        } else {
+          __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = true;
+        }
       }
-    }
-  },
-  onLeave(index) {
-    if (index === 0) {
-      if (__WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause === true) {
-        __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = false;
-      } else {
-        __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = true;
+    },
+    onLeave(index) {
+      if (index === 0) {
+        if (__WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause === true) {
+          __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = false;
+        } else {
+          __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = true;
+        }
       }
-    }
-  },
-});
+    },
+  });
+}
 
-__WEBPACK_IMPORTED_MODULE_2__modules_drawBalls__["a" /* init */]();
+const blurredBalls = new __WEBPACK_IMPORTED_MODULE_2__modules_DrawBalls__["a" /* default */]('blurred-dots', {
+  multiply: 1.5,
+  min: 5,
+  max: 8,
+});
+const dots = new __WEBPACK_IMPORTED_MODULE_2__modules_DrawBalls__["a" /* default */]('dots');
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */])(() => {
-  __WEBPACK_IMPORTED_MODULE_2__modules_drawBalls__["b" /* draw */]();
+  dots.draw();
+  blurredBalls.draw();
 }, 30);
 
 

@@ -31,7 +31,7 @@ gulp.task('sprite', () => {
 });
 
 gulp.task('default', ['watch'], () => {
-  console.log(`${consoleTime()} Frontend Developer Boilerplate by https://github.com/Piotr-Aueternum`);
+  console.log(`${consoleTime()}Frontend Developer Boilerplate by https://github.com/Piotr-Aueternum`);
   bs.init({
     server: 'dist',
     open: false,

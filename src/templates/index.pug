@@ -5,8 +5,9 @@ html
   body
     include ./partials/header
     main#fullpage
-      section.section(data-anchor='intro')
-        canvas#dots
+      section.section.dark-background(data-anchor='intro')
+        canvas.canvas-background#dots
+        canvas.canvas-background#blurred-dots.blurred
         .container
           .intro.intro--home
             h1.intro__heading Frontend Developer
