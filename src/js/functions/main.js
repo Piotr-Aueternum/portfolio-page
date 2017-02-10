@@ -6,4 +6,12 @@ export default function main(fn, fps = 30) {
     main(fn, fps);
   }, 1000 / fps);
 }
+
 main.pause = false;
+main.toggle = () => {
+  if (main.pause === true) {
+    main.pause = false;
+  } else {
+    main.pause = true;
+  }
+};

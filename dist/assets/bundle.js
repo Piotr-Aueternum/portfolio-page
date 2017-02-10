@@ -80,7 +80,15 @@ function main(fn, fps = 30) {
     main(fn, fps);
   }, 1000 / fps);
 }
+
 main.pause = false;
+main.toggle = () => {
+  if (main.pause === true) {
+    main.pause = false;
+  } else {
+    main.pause = true;
+  }
+};
 
 
 /***/ }),
@@ -93,13 +101,13 @@ main.pause = false;
 
 
 
-
-/**
- * Select canvas html id
- * @export
- * @param {element.id} canvasId
- */
 class DrawBalls {
+  /**
+   * Creates an instance of DrawBalls.
+   * @param {string} canvasId
+   * @param {any} [{ multiply, min, max }={ multiply: 1, min: 10, max: 15 }]
+   * @memberOf DrawBalls
+   */
   constructor(canvasId, { multiply, min, max } = { multiply: 1, min: 10, max: 15 }) {
     this.canvas = document.getElementById(canvasId);
     this.canvasFullscreen();
@@ -125,8 +133,8 @@ class DrawBalls {
           y: this.canvas.height * Math.random(),
         },
         vector: {
-          vx: 0.2 * size * this.multiply,
-          vy: 0.2 * size * this.multiply,
+          vx: (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(-20, 20) / 100) * size * this.multiply,
+          vy: (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(-20, 20) / 100) * size * this.multiply,
         },
         property: {
           radius: 3 * size * this.multiply,
@@ -134,7 +142,7 @@ class DrawBalls {
             ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(240, 255)},
             ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(240, 255)},
             ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(240, 255)},
-            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(50, 100) / 1000})`,
+            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(50, 150) / 1000})`,
         },
       });
       window.addEventListener('dblclick', () => {
@@ -395,20 +403,12 @@ if (window.matchMedia(('(min-width: 991px)').matches)) {
     delay: 700,
     onSlide(index) {
       if (index === 0) {
-        if (__WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause === true) {
-          __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = false;
-        } else {
-          __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = true;
-        }
+        __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].toggle();
       }
     },
     onLeave(index) {
       if (index === 0) {
-        if (__WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause === true) {
-          __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = false;
-        } else {
-          __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = true;
-        }
+        __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].toggle();
       }
     },
   });

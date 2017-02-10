@@ -10,20 +10,12 @@ if (window.matchMedia(('(min-width: 991px)').matches)) {
     delay: 700,
     onSlide(index) {
       if (index === 0) {
-        if (main.pause === true) {
-          main.pause = false;
-        } else {
-          main.pause = true;
-        }
+        main.toggle();
       }
     },
     onLeave(index) {
       if (index === 0) {
-        if (main.pause === true) {
-          main.pause = false;
-        } else {
-          main.pause = true;
-        }
+        main.toggle();
       }
     },
   });

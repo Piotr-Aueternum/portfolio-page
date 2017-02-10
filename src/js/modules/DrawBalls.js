@@ -1,13 +1,13 @@
 import Circle from '../class/Circle';
 import randomNumber from '../functions/randomNumber';
 
-
-/**
- * Select canvas html id
- * @export
- * @param {element.id} canvasId
- */
 export default class DrawBalls {
+  /**
+   * Creates an instance of DrawBalls.
+   * @param {string} canvasId
+   * @param {any} [{ multiply, min, max }={ multiply: 1, min: 10, max: 15 }]
+   * @memberOf DrawBalls
+   */
   constructor(canvasId, { multiply, min, max } = { multiply: 1, min: 10, max: 15 }) {
     this.canvas = document.getElementById(canvasId);
     this.canvasFullscreen();
@@ -33,8 +33,8 @@ export default class DrawBalls {
           y: this.canvas.height * Math.random(),
         },
         vector: {
-          vx: 0.2 * size * this.multiply,
-          vy: 0.2 * size * this.multiply,
+          vx: (randomNumber(-20, 20) / 100) * size * this.multiply,
+          vy: (randomNumber(-20, 20) / 100) * size * this.multiply,
         },
         property: {
           radius: 3 * size * this.multiply,
@@ -42,7 +42,7 @@ export default class DrawBalls {
             ${randomNumber(240, 255)},
             ${randomNumber(240, 255)},
             ${randomNumber(240, 255)},
-            ${randomNumber(50, 100) / 1000})`,
+            ${randomNumber(50, 150) / 1000})`,
         },
       });
       window.addEventListener('dblclick', () => {
