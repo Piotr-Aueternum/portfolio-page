@@ -1,10 +1,10 @@
 import main from './functions/main';
 import './modules/initNav';
 import DrawBalls from './modules/DrawBalls';
-import fullPage from './modules/fullpage';
+import Fullpage from './modules/Fullpage';
 
-if (window.matchMedia(('(min-width: 991px)').matches)) {
-  fullPage({
+if (window.matchMedia('(min-width: 1199px)').matches) {
+  const fullpage = new Fullpage({
     container: 'fullpage',
     section: '.section',
     delay: 700,
@@ -19,6 +19,7 @@ if (window.matchMedia(('(min-width: 991px)').matches)) {
       }
     },
   });
+  fullpage.init();
 }
 
 const blurredBalls = new DrawBalls('blurred-dots', {
