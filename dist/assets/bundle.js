@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -97,7 +97,7 @@ main.toggle = () => {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__class_Circle__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__ = __webpack_require__(8);
 
 
 
@@ -121,7 +121,7 @@ class DrawBalls {
   }
   getBalls() {
     const windowWidth = Math.floor(window.innerWidth / 100);
-    for (let i = 1; i < windowWidth * __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(this.min, this.max); i += 1) {
+    for (let i = 1; i < windowWidth * __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(this.min, this.max); i += 1) {
       const size = Math.random();
       const canvas = this.canvas;
       const ctx = this.ctx;
@@ -133,16 +133,16 @@ class DrawBalls {
           y: this.canvas.height * Math.random(),
         },
         vector: {
-          vx: (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(-20, 20) / 100) * size * this.multiply,
-          vy: (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(-20, 20) / 100) * size * this.multiply,
+          vx: (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(-20, 20) / 100) * size * this.multiply,
+          vy: (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(-20, 20) / 100) * size * this.multiply,
         },
         property: {
           radius: 3 * size * this.multiply,
           color: `rgba(
-            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(240, 255)},
-            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(240, 255)},
-            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(240, 255)},
-            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__functions_randomNumber__["a" /* default */])(50, 150) / 1000})`,
+            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(240, 255)},
+            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(240, 255)},
+            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(240, 255)},
+            ${__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(50, 150) / 1000})`,
         },
       });
       window.addEventListener('dblclick', () => {
@@ -181,99 +181,115 @@ class DrawBalls {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_isFn__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_debounce__ = __webpack_require__(6);
+
+
+
 class Fullpage {
   constructor({
     container = 'fullpage',
     section = '.section',
     delay = 700,
+    onStart,
     onSlide,
     onLeave,
   }) {
     this.container = container;
     this.section = section;
     this.delay = delay;
+    this.onStart = onStart;
     this.onSlide = onSlide;
     this.onLeave = onLeave;
     this.fullpage = document.getElementById(container);
-    this.wrapperHeight = this.fullpage.clientHeight;
-    this.sections = this.fullpage.querySelectorAll(this.section);
     this.transform = 0;
-    this.sectionHeight = 0;
     this.index = 0;
     this.id = window.location.hash.replace(/\?|#/, '');
     this.initId = this.id;
     this.init();
+    this.slide();
+    this.afterLoad();
+    this.afterResize();
   }
-  slideTo() {
+  init() {
+    document.body.classList.add(this.container);
+    this.fullpage.classList.add(`${this.container}__wrapper`);
+    this.fullpage.style.transitionDuration = `${this.delay}ms`;
+    this.setSectionHeight();
+    this.updatePosition();
+  }
+  setSectionHeight() {
+    this.sections = this.fullpage.querySelectorAll(this.section);
+    this.wrapperHeight = this.fullpage.clientHeight;
+    this.sectionHeight = window.innerHeight;
+    for (let i = 0; i < this.sections.length; i += 1) {
+      this.sections[i].style.height = `${Math.floor(this.sectionHeight)}px`;
+    }
+  }
+  afterResize() {
+    const onResize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_debounce__["a" /* default */])(() => {
+      this.setSectionHeight();
+      this.updatePosition();
+    }, this.delay);
+    window.addEventListener('resize', onResize);
+  }
+  updatePosition() {
+    this.transform = -this.index * this.sectionHeight;
+    this.fullpage.style.transform = `translate3d(0, ${Math.floor(this.transform)}px, 0)`;
+  }
+  afterLoad() {
     this.sections.forEach((sectionEl, key) => {
       if (this.initId === sectionEl.dataset.fpId) {
-        this.transform = -key * this.sectionHeight;
         this.index = key;
-        this.fullpage.style.transform = `translate3d(0, ${Math.floor(this.transform)}px, 0)`;
-      } else {
-        this.setHash();
+      }
+    });
+  }
+  setIndex() {
+    this.sections.forEach((sectionEl, key) => {
+      if (this.id === sectionEl.dataset.fpId) {
+        this.index = key;
       }
     });
   }
   setHash() {
-    this.hash = this.sections[this.index].dataset.fpId;
-    window.location.hash = this.hash;
+    if (this.sections[this.index].dataset.fpId) {
+      this.hash = this.sections[this.index].dataset.fpId;
+      window.location.hash = this.hash;
+      this.updateId();
+    }
+  }
+  changeIndex(value) {
+    this.index += value;
+  }
+  updateId() {
     this.id = window.location.hash.replace(/\?|#/, '');
   }
-  init() {
-    this.setupContainer();
-    this.setSectionsHeight();
-    this.slide();
-    this.slideTo();
-  }
   slide() {
+    window.addEventListener('hashchange', () => {
+      this.updateId();
+      this.setIndex();
+      this.updatePosition();
+    });
     this.time = Date.now();
     window.addEventListener('wheel', (e) => {
-      const direction = e.deltaY < 0 ? 'up' : 'down';
+      this.direction = e.deltaY < 0 ? 'up' : 'down';
       if (((this.time + this.delay) - Date.now()) < 0) {
-        if (this.onSlide && typeof this.onSlide === 'function') {
-          this.onSlide(this.index);
-        }
-        if (direction === 'up' && this.transform < 0) {
-          this.index -= 1;
-          this.transform += this.sectionHeight;
-        } else if (direction === 'down' && -this.transform < this.wrapperHeight - this.sectionHeight) {
-          this.index += 1;
-          this.transform -= this.sectionHeight;
-        }
-        this.fullpage.style.transform = `translate3d(0, ${Math.floor(this.transform)}px, 0)`;
-        this.time = Date.now();
-        if (this.onLeave && typeof this.onLeave === 'function') {
-          this.onLeave(this.index);
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.onStart(this.index, this.direction));
+        setTimeout(() => {
+          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.onLeave(this.index, this.direction));
+        }, this.delay);
+        if (this.direction === 'up' && this.index > 0) {
+          this.changeIndex(-1);
+        } else if (this.direction === 'down' && this.index < this.sections.length - 1) {
+          this.changeIndex(1);
         }
         this.setHash();
+        this.time = Date.now();
       }
     });
   }
-  setupContainer() {
-    document.body.classList.add(this.container);
-    this.fullpage.classList.add(`${this.container}__wrapper`);
-    this.fullpage.style.transitionDuration = `${this.delay}ms`;
-    this.fullpage.style.transform = `translate3d(0, ${this.transform}px, 0)`;
-  }
-  getSectionHeight() {
-    return this.wrapperHeight / this.sections.length;
-  }
-  setSectionsHeight() {
-    if (this.section) {
-      this.sectionHeight = this.getSectionHeight();
-      const sectionHeight = this.getSectionHeight();
-      const sectionAmount = this.sections.length;
-      for (let i = 0; i < sectionAmount; i += 1) {
-        this.sections[i].style.height = `${Math.floor(sectionHeight)}px`;
-      }
-    } else {
-      throw new TypeError('Section elements not found.');
-    }
-  }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Fullpage;
-
 
 
 
@@ -411,6 +427,40 @@ class Point {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = debounce;
+function debounce(callback, wait, context = this) {
+  let timeout = null;
+  let callbackArgs = null;
+  const later = () => callback.apply(context, callbackArgs);
+  return function (...args) {
+    callbackArgs = args;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = isFn;
+/**
+ * @param {function} fn -  if function then run param as function
+ */
+function isFn(fn) {
+  if (fn && typeof fn === 'function') {
+    fn();
+  }
+}
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = randomNumber;
 function randomNumber(getMin, getMax) {
   const min = Math.ceil(getMin);
@@ -420,7 +470,7 @@ function randomNumber(getMin, getMax) {
 
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -440,14 +490,18 @@ if (window.matchMedia('(min-width: 1199px)').matches) {
     container: 'fullpage',
     section: '.section',
     delay: 700,
-    onSlide(index) {
+    onStart(index) {
       if (index === 0) {
         __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].toggle();
+      } else {
+        __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = true;
       }
     },
     onLeave(index) {
       if (index === 0) {
         __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].toggle();
+      } else {
+        __WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */].pause = true;
       }
     },
   });
@@ -460,6 +514,7 @@ const blurredBalls = new __WEBPACK_IMPORTED_MODULE_2__modules_DrawBalls__["a" /*
   max: 8,
 });
 const dots = new __WEBPACK_IMPORTED_MODULE_2__modules_DrawBalls__["a" /* default */]('dots');
+
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__functions_main__["a" /* default */])(() => {
   dots.draw();
   blurredBalls.draw();

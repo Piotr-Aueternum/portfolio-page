@@ -1,5 +1,6 @@
 .skills
 	display flex
+	flex-wrap wrap
 	width 100%
 	margin-bottom 2rem
 	&__tooltip
@@ -26,7 +27,9 @@
 		border-radius 5px
 		z-index -1
 	&__col
-		flex-basis 25%
+		flex-basis 50%
+		+min(sm)
+			flex-basis 25%
 		h3
 			letter-spacing 0.025em
 			margin-bottom 1rem

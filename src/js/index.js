@@ -8,14 +8,18 @@ if (window.matchMedia('(min-width: 1199px)').matches) {
     container: 'fullpage',
     section: '.section',
     delay: 700,
-    onSlide(index) {
+    onStart(index) {
       if (index === 0) {
         main.toggle();
+      } else {
+        main.pause = true;
       }
     },
     onLeave(index) {
       if (index === 0) {
         main.toggle();
+      } else {
+        main.pause = true;
       }
     },
   });
@@ -28,6 +32,7 @@ const blurredBalls = new DrawBalls('blurred-dots', {
   max: 8,
 });
 const dots = new DrawBalls('dots');
+
 main(() => {
   dots.draw();
   blurredBalls.draw();

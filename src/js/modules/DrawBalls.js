@@ -1,5 +1,5 @@
 import Circle from '../class/Circle';
-import randomNumber from '../functions/randomNumber';
+import randomNumber from '../utilities/randomNumber';
 
 export default class DrawBalls {
   /**
