@@ -2,6 +2,7 @@
 	"globals": {
 		"document": true,
     "window": true,
+    "navigator": true,
 		"DOMParser": true,
     "CanvasRenderingContext2D": true
 	},

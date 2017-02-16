@@ -1,26 +1,14 @@
 export default class Point {
   constructor({
-    ctx,
-    canvas,
     pos: { x, y },
     vector: { vx, vy },
   } = {}) {
-    if (ctx instanceof CanvasRenderingContext2D) {
-      this.ctx = ctx;
-    } else {
-      throw new TypeError('Wrong context of canvas.');
-    }
-    if (canvas && canvas.nodeName && canvas.nodeName === 'CANVAS') {
-      this.canvas = canvas;
-    } else {
-      throw new TypeError('Canvas node element is incorrect.');
-    }
     this.x = x || 0;
     this.y = y || 0;
     this.vx = vx || 0;
     this.vy = vy || 0;
   }
-  borderPhysics() {
+  boundary() {
     if (this.y + this.vy > this.canvas.height || this.y + this.vy < 0) {
       this.vy = -this.vy;
     }

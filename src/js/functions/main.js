@@ -1,6 +1,7 @@
 export default function main(fn, fps = 30) {
   setTimeout(() => {
     if (main.pause === false) {
+      window.requestAnimationFrame(() => fn());
       fn();
     }
     main(fn, fps);

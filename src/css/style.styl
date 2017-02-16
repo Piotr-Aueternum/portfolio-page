@@ -31,7 +31,7 @@
 @import 'components/skills'
 @import 'components/tooltip'
 @import 'components/intro'
-@import 'components/fullpage'
+@import 'components/muview'
 
 @import 'trumps/container'
 
@@ -40,15 +40,15 @@
   top 0
   left 0
   pointer-events none
+  z-index 2
 .blurred
   filter blur(0.5px)
-  z-index 2
-.dark-background {
+.dark-background
   position relative
   background-color #000
   color #fdfdfd
   z-index 0
-  &::after {
+  &::after
     position absolute
     top 0
     left 0
@@ -60,5 +60,3 @@
     background-repeat no-repeat
     background-position 0 0
     transform: scaleX(-1)
-  }
-}

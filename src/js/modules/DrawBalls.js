@@ -1,13 +1,8 @@
 import Circle from '../class/Circle';
 import randomNumber from '../utilities/randomNumber';
+import debounce from '../utilities/debounce';
 
 export default class DrawBalls {
-  /**
-   * Creates an instance of DrawBalls.
-   * @param {string} canvasId
-   * @param {any} [{ multiply, min, max }={ multiply: 1, min: 10, max: 15 }]
-   * @memberOf DrawBalls
-   */
   constructor(canvasId, { multiply, min, max } = { multiply: 1, min: 10, max: 15 }) {
     this.canvas = document.getElementById(canvasId);
     this.canvasFullscreen();
@@ -16,7 +11,7 @@ export default class DrawBalls {
     this.min = min;
     this.max = max;
     this.multiply = multiply;
-    window.addEventListener('resize', () => { this.resize(); });
+    this.afterResize();
     this.getBalls();
   }
   getBalls() {
@@ -68,7 +63,10 @@ export default class DrawBalls {
     this.canvas.width = document.body.clientWidth;
     this.canvas.height = window.innerHeight;
   }
-  resize() {
-    this.draw();
+  afterResize() {
+    const onResize = debounce(() => {
+      this.draw();
+    }, this.delay);
+    window.addEventListener('resize', onResize);
   }
 }
