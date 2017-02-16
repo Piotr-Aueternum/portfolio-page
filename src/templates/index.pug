@@ -1,18 +1,17 @@
 include ./mixins/tooltip
 doctype html
-html
+html(lang='pl')
   include ./partials/head
   body
     include ./partials/header
-    main#fullpage
-      section.section.dark-background(data-fp-id='intro')
+    main#muview
+      section.section.dark-background(data-mv-id='intro')
         canvas.canvas-background#dots
-        canvas.canvas-background#blurred-dots.blurred
         .container
           .intro.intro--home
             h1.intro__heading Frontend Developer
             h2.intro__lead Piotr Sochacz
-      section.section(data-fp-id='about')
+      section.section(data-mv-id='about')
         .container
           .intro.intro--about
             h2.intro__heading O mnie
@@ -26,7 +25,7 @@ html
               <br>Poznałem wiele przydatnych technologii i zdobyłem doświadczenie
               <br>w realizacji projektów. Zamierzam dalej się rozwijać w tym kierunku,
               <br>jest to moje hobby i praca, lubię tworzyć i widzieć jak projekt się rozwija.
-      section.section(data-fp-id='skills')
+      section.section(data-mv-id='skills')
         .container
           .intro.intro--skills
             - const skills = require(`${dirname}/src/data/skills/skills.json`).skills;
@@ -35,19 +34,19 @@ html
               .skills
                 - const groups = skill.skillsGroup;
                 each group in groups
-                  .skills__col
-                    h3 #{group.skillsTech}
-                    ul
+                  .skills__col.skills-set
+                    h3.skills-set__heading #{group.skillsTech}
+                    ul.skills-set__list.skills-list
                       - const techs = group.skillsDesc;
                       each tech in techs
-                        li
+                        li.skills-list__item
                           +tooltip(tech.techHeading, tech.techDesc, 'tooltip')
-      section.section(data-fp-id='projects')
+      section.section(data-mv-id='projects')
         .container
           .intro.intro--projects
             h2.intro__heading Zakres prac
             .intro__content Piotr Sochacz
-      section.section(data-fp-id='contact')
+      section.section(data-mv-id='contact')
         .container
           .intro.intro--contact
             h2.intro__heading Kontakt

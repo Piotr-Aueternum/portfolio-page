@@ -37,16 +37,16 @@
           "skillsTech": "JS",
           "skillsDesc": [
             {
-              "techHeading": "Animacje",
-              "techDesc": "Tworzenie animacji w JS przy użyciu bibliotek takich jak snap.svg, d3.js, bodymovin. Pozwalają na wygodniejsze ustawianie opóźnień dla animacji, dzięki kolejkowaniu w JS."
-            },
-            {
               "techHeading": "ES5",
               "techDesc": "Czuje się swobodnie w&nbsp;ES5, znajomość tej wersji standardu pozwala na&nbsp;pisanie kodu działającego w&nbsp;wielu popularnych przeglądarkach."
             },
             {
               "techHeading": "ES6",
               "techDesc": "Kolejna wersja standardu, która poprawia wiele rzeczy i dodaje więcej wbudowanych funkcji przyśpieszających pracę na&nbsp;kodzie."
+            },
+            {
+              "techHeading": "Animacje",
+              "techDesc": "Tworzenie animacji w JS przy użyciu bibliotek takich jak snap.svg, d3.js, bodymovin. Pozwalają na wygodniejsze ustawianie opóźnień dla animacji, dzięki kolejkowaniu w JS."
             }
           ]
         },
