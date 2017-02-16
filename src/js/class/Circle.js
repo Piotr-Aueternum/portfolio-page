@@ -57,7 +57,6 @@ export default class Circle extends Point {
       this.vy += 0.25;
     }
     this.x += this.vx;
-    this.y = Math.sin(this.x);
-    // this.y += this.vy;
+    this.y += this.vy;
   }
 }

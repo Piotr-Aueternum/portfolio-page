@@ -131,8 +131,7 @@ class Circle extends __WEBPACK_IMPORTED_MODULE_0__Point__["a" /* default */] {
       this.vy += 0.25;
     }
     this.x += this.vx;
-    this.y = Math.sin(this.x);
-    // this.y += this.vy;
+    this.y += this.vy;
   }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Circle;
