@@ -9,12 +9,14 @@ export default class Muview {
     onStart,
     onSlide,
     onLeave,
+    onResize,
   }) {
     this.container = container;
     this.section = section;
     this.delay = delay;
     this.onStart = onStart;
     this.onSlide = onSlide;
+    this.onResize = onResize;
     this.onLeave = onLeave;
     this.muview = document.getElementById(container);
     this.transform = 0;
@@ -42,6 +44,9 @@ export default class Muview {
   }
   afterResize() {
     const onResize = debounce(() => {
+      if (isFn(this.onResize)) {
+        this.onResize(this.index, this.direction);
+      }
       this.setSectionHeight();
       this.setTransform();
     }, this.delay);
