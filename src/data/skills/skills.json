@@ -8,11 +8,15 @@
           "skillsDesc": [
             {
               "techHeading": "Pug(Jade)",
-              "techDesc": "Przyśpiesza moją pracę, pilnuje spójności kodu, pozwala zorganizować lepiej kod źródłowy."
+              "techDesc": "Przyśpiesza moją pracę, pilnuje spójności kodu, usprawnia tworzenie prototypów/makiet stron, zanim będą podpięte do CMS."
             },
             {
               "techHeading": "Semantyka",
               "techDesc": "W projektach stosuję znaczniki HTML5, aby&nbsp;kod był bardziej czytelny i lepiej idenksowany przez przeglądarki."
+            },
+            {
+              "techHeading": "Dostępność",
+              "techDesc": "Staram się pisać dostępne dla użytkowników strony, aby czytniki ekranowe i pomocnicy głosowi nie mieli problemu z odczytaniem ważnej treści na stronie."
             }
           ]
         },
@@ -59,7 +63,7 @@
             },
             {
               "techHeading": "Webpack",
-              "techDesc": "Konfiguracja środowiska pod&nbsp;ES6 z dodaniem loaderów np. ESLint."
+              "techDesc": "Konfiguracja środowiska do lepszego zarządzania kodem JS."
             },
             {
               "techHeading": "Gulp + Webpack",

@@ -178,6 +178,9 @@ class Muview {
     this.slide();
     this.afterLoad();
     this.afterResize();
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 300);
   }
   init() {
     document.body.classList.add(this.container);
@@ -276,9 +279,11 @@ function initNav(nodeNav) {
   const nav = document.querySelector(nodeNav);
   const toggle = nav.querySelector(`${nodeNav}__toggle`);
   const list = nav.querySelector(`${nodeNav}__list`);
+  const activeClass = 'active';
+  list.classList.remove(activeClass);
   function expand() {
-    list.classList.toggle('active');
-    toggle.classList.toggle('active');
+    list.classList.toggle(activeClass);
+    toggle.classList.toggle(activeClass);
   }
   toggle.addEventListener('click', () => {
     expand();
@@ -397,7 +402,7 @@ function debounce(callback, wait, context = this) {
   let timeout = null;
   let callbackArgs = null;
   const later = () => callback.apply(context, callbackArgs);
-  return function (...args) {
+  return (...args) => {
     callbackArgs = args;
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
@@ -410,12 +415,15 @@ function debounce(callback, wait, context = this) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = isFn;
+/**
+ * If it's a function it should return true, otherwise it will return false.
+ * @param {Function} [fn]
+ * @returns {Boolean}
+ */
 function isFn(fn) {
-  if (fn && typeof fn === 'function') {
-    fn();
-  }
+  return (fn && typeof fn === 'function');
 }
+/* harmony default export */ __webpack_exports__["a"] = isFn;
 
 
 /***/ }),

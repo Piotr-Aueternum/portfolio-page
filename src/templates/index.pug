@@ -1,4 +1,3 @@
-include ./mixins/tooltip
 doctype html
 html(lang='pl')
   include ./partials/head
@@ -40,7 +39,12 @@ html(lang='pl')
                       - const techs = group.skillsDesc;
                       each tech in techs
                         li.skills-list__item
-                          +tooltip(tech.techHeading, tech.techDesc, 'tooltip')
+                          include ./mixins/tooltip
+                          div.tooltip
+                            button.tooltip__heading #{tech.techHeading}
+                            p.tooltip__description
+                              span.tooltip__lead #{tech.techHeading}
+                              | !{tech.techDesc}
       section.section(data-mv-id='projects')
         .container
           .intro.intro--projects

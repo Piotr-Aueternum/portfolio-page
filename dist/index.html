@@ -19,7 +19,7 @@
     <header class="header">
       <nav class="header__nav nav">
         <button class="nav__toggle"></button>
-        <ul class="nav__list nav-list">
+        <ul class="nav__list nav-list active">
           <li class="nav-list__item"><a class="nav-list__link" href="#intro" title="Główna">
               <svg x="0" y="0" height="24px" width="24px" viewBox="0 0 47 47">
                                 <g>
@@ -109,14 +109,20 @@
                 <ul class="skills-set__list skills-list">
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Pug(Jade)</h4>
-                      <p class="tooltip__description"><span class="tooltip__lead">Pug(Jade)</span>Przyśpiesza moją pracę, pilnuje spójności kodu, pozwala zorganizować lepiej kod źródłowy.</p>
+                      <button class="tooltip__heading">Pug(Jade)</button>
+                      <p class="tooltip__description"><span class="tooltip__lead">Pug(Jade)</span>Przyśpiesza moją pracę, pilnuje spójności kodu, usprawnia tworzenie prototypów/makiet stron, zanim będą podpięte do CMS.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Semantyka</h4>
+                      <button class="tooltip__heading">Semantyka</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Semantyka</span>W projektach stosuję znaczniki HTML5, aby&nbsp;kod był bardziej czytelny i lepiej idenksowany przez przeglądarki.</p>
+                    </div>
+                  </li>
+                  <li class="skills-list__item">
+                    <div class="tooltip">
+                      <button class="tooltip__heading">Dostępność</button>
+                      <p class="tooltip__description"><span class="tooltip__lead">Dostępność</span>Staram się pisać dostępne dla użytkowników strony, aby czytniki ekranowe i pomocnicy głosowi nie mieli problemu z odczytaniem ważnej treści na stronie.</p>
                     </div>
                   </li>
                 </ul>
@@ -126,19 +132,19 @@
                 <ul class="skills-set__list skills-list">
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Preprocesory</h4>
+                      <button class="tooltip__heading">Preprocesory</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Preprocesory</span>Podczas tworzenia korzystam z preprocesorów takich jak Sass, SCSS, Less i Stylus. Preferuję czystą składnię z tego powodu najlepiej pisze mi się w Stylusie, w pozostałych preprocesorach czuje się równie swobodnie.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Metodologie</h4>
+                      <button class="tooltip__heading">Metodologie</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Metodologie</span>Korzystam z metodologii BEM dla lepszego zarządzania kodem i lepszego skalowania architektury CSS.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Animacje</h4>
+                      <button class="tooltip__heading">Animacje</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Animacje</span>Tworzenie animacji w CSS nie sprawia mi problemów, zyskałem doświadczenie w tworzeniu i w zarządzaniu kodem animacji.</p>
                     </div>
                   </li>
@@ -149,20 +155,20 @@
                 <ul class="skills-set__list skills-list">
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Animacje</h4>
-                      <p class="tooltip__description"><span class="tooltip__lead">Animacje</span>Tworzenie animacji w JS przy użyciu bibliotek takich jak snap.svg, d3.js, bodymovin. Pozwalają na wygodniejsze ustawianie opóźnień dla animacji, dzięki kolejkowaniu w JS.</p>
-                    </div>
-                  </li>
-                  <li class="skills-list__item">
-                    <div class="tooltip">
-                      <h4 class="tooltip__heading">ES5</h4>
+                      <button class="tooltip__heading">ES5</button>
                       <p class="tooltip__description"><span class="tooltip__lead">ES5</span>Czuje się swobodnie w&nbsp;ES5, znajomość tej wersji standardu pozwala na&nbsp;pisanie kodu działającego w&nbsp;wielu popularnych przeglądarkach.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">ES6</h4>
+                      <button class="tooltip__heading">ES6</button>
                       <p class="tooltip__description"><span class="tooltip__lead">ES6</span>Kolejna wersja standardu, która poprawia wiele rzeczy i dodaje więcej wbudowanych funkcji przyśpieszających pracę na&nbsp;kodzie.</p>
+                    </div>
+                  </li>
+                  <li class="skills-list__item">
+                    <div class="tooltip">
+                      <button class="tooltip__heading">Animacje</button>
+                      <p class="tooltip__description"><span class="tooltip__lead">Animacje</span>Tworzenie animacji w JS przy użyciu bibliotek takich jak snap.svg, d3.js, bodymovin. Pozwalają na wygodniejsze ustawianie opóźnień dla animacji, dzięki kolejkowaniu w JS.</p>
                     </div>
                   </li>
                 </ul>
@@ -172,19 +178,19 @@
                 <ul class="skills-set__list skills-list">
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Gulp</h4>
+                      <button class="tooltip__heading">Gulp</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Gulp</span>Dobrze zaznajomiłem się z&nbsp;Gulpem, na swoje potrzeby tworze dedykowane konfiguracje do projektów.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Webpack</h4>
-                      <p class="tooltip__description"><span class="tooltip__lead">Webpack</span>Konfiguracja środowiska pod&nbsp;ES6 z dodaniem loaderów np. ESLint.</p>
+                      <button class="tooltip__heading">Webpack</button>
+                      <p class="tooltip__description"><span class="tooltip__lead">Webpack</span>Konfiguracja środowiska do lepszego zarządzania kodem JS.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Gulp + Webpack</h4>
+                      <button class="tooltip__heading">Gulp + Webpack</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Gulp + Webpack</span>Połączenie środowisk pozwoliło mi na połączenie plusów jednego i drugiego rozwiązania, prostotę task-runnera i zaawansowaną technikę bundle'owania plików.</p>
                     </div>
                   </li>
@@ -198,25 +204,25 @@
                 <ul class="skills-set__list skills-list">
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">React</h4>
+                      <button class="tooltip__heading">React</button>
                       <p class="tooltip__description"><span class="tooltip__lead">React</span>Poznałem działanie i założenia biblioteki od Facebooka, wiem jakie korzyści i wady niesie jego użytkowanie.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Vue</h4>
+                      <button class="tooltip__heading">Vue</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Vue</span>Lekka i przyjemna biblioteka do&nbsp;tworzenia warstwy widoku w&nbsp;aplikacji, używająca szablonów.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Mustache</h4>
+                      <button class="tooltip__heading">Mustache</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Mustache</span>Zapoznałem się z działaniem Mustache.js, narzędziem o które się opiera znaczna ilość frameworków/bibliotek korzystających z&nbsp;szablonów.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Grunt</h4>
+                      <button class="tooltip__heading">Grunt</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Grunt</span>Pierwszy taskrunner jaki poznałem wraz z generatorem Yeoman.</p>
                     </div>
                   </li>
@@ -227,25 +233,25 @@
                 <ul class="skills-set__list skills-list">
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Magento 1.x</h4>
+                      <button class="tooltip__heading">Magento 1.x</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Magento 1.x</span>Stworzenie struktury pod Magento i wdrożenie jej, podstawowa funkcjonalność.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Contao 3.x</h4>
+                      <button class="tooltip__heading">Contao 3.x</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Contao 3.x</span>Zaznajomienie się ze strukturą i&nbsp;panel adminem.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Wordpress</h4>
+                      <button class="tooltip__heading">Wordpress</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Wordpress</span>Znajomość panelu admina, lokalizacji plików.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Twig</h4>
+                      <button class="tooltip__heading">Twig</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Twig</span>Współpraca ze wzorcem Twig podczas poznawania Symfony 2.</p>
                     </div>
                   </li>
@@ -256,13 +262,13 @@
                 <ul class="skills-set__list skills-list">
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">SQL</h4>
+                      <button class="tooltip__heading">SQL</button>
                       <p class="tooltip__description"><span class="tooltip__lead">SQL</span>Tworzenie prostych zapytań do&nbsp;bazy SQL z poziomu kodu PHP i terminala.</p>
                     </div>
                   </li>
                   <li class="skills-list__item">
                     <div class="tooltip">
-                      <h4 class="tooltip__heading">Markdown</h4>
+                      <button class="tooltip__heading">Markdown</button>
                       <p class="tooltip__description"><span class="tooltip__lead">Markdown</span>Poznałem go podczas tworzenia treści na mediawiki i&nbsp;dokumentacji na github.com.</p>
                     </div>
                   </li>

@@ -27,6 +27,9 @@ export default class Muview {
     this.slide();
     this.afterLoad();
     this.afterResize();
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 300);
   }
   init() {
     document.body.classList.add(this.container);
