@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,8 +71,21 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__class_Circle__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__ = __webpack_require__(8);
+/* harmony export (immutable) */ __webpack_exports__["a"] = randomNumber;
+function randomNumber(getMin, getMax) {
+  const min = Math.ceil(getMin);
+  const max = Math.floor(getMax);
+  return Math.floor(Math.random() * ((max - min) + 1)) + min;
+}
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__class_Circle__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__ = __webpack_require__(0);
 /* harmony export (immutable) */ __webpack_exports__["b"] = gameLoop;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return canvas; });
 
@@ -143,12 +156,12 @@ function gameLoop() {
 
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_isFn__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_debounce__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_isFn__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_debounce__ = __webpack_require__(7);
 
 
 
@@ -279,7 +292,7 @@ class Muview {
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 function initNav(nodeNav) {
@@ -300,11 +313,13 @@ initNav('.nav');
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Point__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Point__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__ = __webpack_require__(0);
+
 
 
 class Circle extends __WEBPACK_IMPORTED_MODULE_0__Point__["a" /* default */] {
@@ -363,6 +378,8 @@ class Circle extends __WEBPACK_IMPORTED_MODULE_0__Point__["a" /* default */] {
       this.vy *= 0.99;
       this.vy += 0.25;
     }
+    this.x += this.vx * (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(-100, 100) / 100);
+    this.y += this.vy * (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(-100, 100) / 100);
     this.x += this.vx;
     this.y += this.vy;
   }
@@ -372,7 +389,7 @@ class Circle extends __WEBPACK_IMPORTED_MODULE_0__Point__["a" /* default */] {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -400,15 +417,15 @@ class Point {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_initNav__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_initNav__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_initNav___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__modules_initNav__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_Muview__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__functions_gameLoop__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_Muview__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__functions_gameLoop__ = __webpack_require__(1);
 
 
 
@@ -431,7 +448,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__functions_gameLoop__["b" /* g
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -449,7 +466,7 @@ function debounce(callback, wait, context = this) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -462,19 +479,6 @@ function isFn(fn) {
   return (fn && typeof fn === 'function');
 }
 /* harmony default export */ __webpack_exports__["a"] = (isFn);
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = randomNumber;
-function randomNumber(getMin, getMax) {
-  const min = Math.ceil(getMin);
-  const max = Math.floor(getMax);
-  return Math.floor(Math.random() * ((max - min) + 1)) + min;
-}
 
 
 /***/ })

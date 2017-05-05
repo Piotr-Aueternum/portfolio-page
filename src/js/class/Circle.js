@@ -1,4 +1,5 @@
 import Point from './Point';
+import randomNumber from '../utilities/randomNumber';
 
 export default class Circle extends Point {
   constructor({
@@ -56,6 +57,8 @@ export default class Circle extends Point {
       this.vy *= 0.99;
       this.vy += 0.25;
     }
+    this.x += this.vx * (randomNumber(-100, 100) / 100);
+    this.y += this.vy * (randomNumber(-100, 100) / 100);
     this.x += this.vx;
     this.y += this.vy;
   }
