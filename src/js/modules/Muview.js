@@ -13,46 +13,50 @@ export default class Muview {
   }) {
     this.container = container;
     this.section = section;
-    this.delay = delay;
-    this.onStart = onStart;
-    this.onSlide = onSlide;
-    this.onResize = onResize;
-    this.onLeave = onLeave;
     this.muview = document.getElementById(container);
-    this.transform = 0;
-    this.index = 0;
-    this.id = window.location.hash.replace(/\?|#/, '');
-    this.initId = this.id;
+    this.state = {
+      delay,
+      transform: 0,
+      index: 0,
+      id: window.location.hash.replace(/\?|#/, ''),
+      initId: this.id,
+    };
+    this.cb = {
+      onStart,
+      onSlide,
+      onLeave,
+      onResize,
+    };
     this.init();
     this.slide();
     this.afterLoad();
     this.afterResize();
     setTimeout(() => {
       window.scrollTo(0, 0);
-    }, 300);
+    });
   }
   init() {
     document.body.classList.add(this.container);
     this.muview.classList.add(`${this.container}__wrapper`);
-    this.muview.style.transitionDuration = `${this.delay}ms`;
+    this.muview.style.transitionDuration = `${this.state.delay}ms`;
     this.setSectionHeight();
     this.setTransform();
   }
   afterLoad() {
     this.sections.forEach((sectionEl, key) => {
-      if (this.initId === sectionEl.dataset.mvId) {
-        this.index = key;
+      if (this.state.initId === sectionEl.dataset.mvId) {
+        this.state.index = key;
       }
     });
   }
   afterResize() {
     const onResize = debounce(() => {
-      if (isFn(this.onResize)) {
-        this.onResize(this.index, this.direction);
+      if (isFn(this.cb.onResize)) {
+        this.cb.onResize(this.state.index, this.direction);
       }
       this.setSectionHeight();
       this.setTransform();
-    }, this.delay);
+    }, this.state.delay);
     window.addEventListener('resize', onResize);
   }
   setSectionHeight() {
@@ -64,28 +68,28 @@ export default class Muview {
     }
   }
   setTransform() {
-    this.transform = -this.index * this.sectionHeight;
-    this.muview.style.transform = `translate3d(0, ${Math.floor(this.transform)}px, 0)`;
+    this.state.transform = -this.state.index * this.sectionHeight;
+    this.muview.style.transform = `translate3d(0, ${Math.floor(this.state.transform)}px, 0)`;
   }
   setIndex() {
     this.sections.forEach((sectionEl, key) => {
-      if (this.id === sectionEl.dataset.mvId) {
-        this.index = key;
+      if (this.state.id === sectionEl.dataset.mvId) {
+        this.state.index = key;
       }
     });
   }
   setHash() {
-    if (this.sections[this.index].dataset.mvId) {
-      this.hash = this.sections[this.index].dataset.mvId;
+    if (this.sections[this.state.index].dataset.mvId) {
+      this.hash = this.sections[this.state.index].dataset.mvId;
       window.location.hash = this.hash;
       this.updateId();
     }
   }
   changeIndexBy(value) {
-    this.index += value;
+    this.state.index += value;
   }
   updateId() {
-    this.id = window.location.hash.replace(/\?|#/, '');
+    this.state.id = window.location.hash.replace(/\?|#/, '');
   }
   slide() {
     window.addEventListener('hashchange', () => {
@@ -93,25 +97,29 @@ export default class Muview {
       this.setIndex();
       this.setTransform();
     });
-    this.time = Date.now();
+    let time = Date.now();
     window.addEventListener('wheel', (e) => {
-      this.direction = e.deltaY < 0 ? 'up' : 'down';
-      if (((this.time + this.delay) - Date.now()) < 0) {
-        if (isFn(this.onStart)) {
-          this.onStart(this.index, this.direction);
-        }
-        setTimeout(() => {
-          if (isFn(this.onLeave)) {
-            this.onLeave(this.index, this.direction);
+      console.log(e.wheelDelta);
+      if (Math.abs(e.wheelDelta) >= 80) {
+        this.direction = e.deltaY < 0 ? 'up' : 'down';
+        if (((time + this.state.delay) - Date.now()) < 0) {
+          if (isFn(this.cb.onStart)) {
+            this.cb.onStart(this.state.index, this.direction);
           }
-        }, this.delay);
-        if (this.direction === 'up' && this.index > 0) {
-          this.changeIndexBy(-1);
-        } else if (this.direction === 'down' && this.index < this.sections.length - 1) {
-          this.changeIndexBy(1);
+          setTimeout(() => {
+            if (isFn(this.cb.onLeave)) {
+              this.cb.onLeave(this.state.index, this.direction);
+            }
+          }, this.state.delay);
+          if (this.direction === 'up' && this.state.index > 0) {
+            this.changeIndexBy(-1);
+            this.setHash();
+          } else if (this.direction === 'down' && this.state.index < this.sections.length - 1) {
+            this.changeIndexBy(1);
+            this.setHash();
+          }
+          time = Date.now();
         }
-        this.setHash();
-        this.time = Date.now();
       }
     });
   }
