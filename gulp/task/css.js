@@ -11,7 +11,7 @@ export default function css() {
   gulp.src('src/css/style.styl')
     .pipe(plumber())
     .pipe(stylus())
-    .pipe(autoprefixer({ browsers: ['> 1%', 'IE 7'], cascade: false }))
+    .pipe(autoprefixer({ browsers: ['> 1%', 'IE 10'], cascade: false }))
     .pipe(gulpCleanCSS({ debug: true }, (details) => {
       console.log(`${consoleTime()}${details.name} original size ${chalk.cyan(((details.stats.originalSize) / 1024).toPrecision(4))} ${chalk.bold('KB')}`);
       console.log(`${consoleTime()}${details.name} minified size ${chalk.cyan(((details.stats.minifiedSize) / 1024).toPrecision(4))} ${chalk.bold('KB')}`);

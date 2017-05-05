@@ -1,41 +1,41 @@
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-
+/******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
-
+/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
-
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-
-
+/******/
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-
+/******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-
+/******/
 /******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
-
+/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -46,7 +46,7 @@
 /******/ 			});
 /******/ 		}
 /******/ 	};
-
+/******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -55,15 +55,15 @@
 /******/ 		__webpack_require__.d(getter, 'a', getter);
 /******/ 		return getter;
 /******/ 	};
-
+/******/
 /******/ 	// Object.prototype.hasOwnProperty.call
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-
+/******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -72,7 +72,7 @@
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__class_Circle__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__ = __webpack_require__(8);
 /* harmony export (immutable) */ __webpack_exports__["b"] = gameLoop;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return canvas; });
 
@@ -147,8 +147,8 @@ function gameLoop() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_isFn__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_debounce__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_isFn__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_debounce__ = __webpack_require__(6);
 
 
 
@@ -164,46 +164,50 @@ class Muview {
   }) {
     this.container = container;
     this.section = section;
-    this.delay = delay;
-    this.onStart = onStart;
-    this.onSlide = onSlide;
-    this.onResize = onResize;
-    this.onLeave = onLeave;
     this.muview = document.getElementById(container);
-    this.transform = 0;
-    this.index = 0;
-    this.id = window.location.hash.replace(/\?|#/, '');
-    this.initId = this.id;
+    this.state = {
+      delay,
+      transform: 0,
+      index: 0,
+      id: window.location.hash.replace(/\?|#/, ''),
+      initId: this.id,
+    };
+    this.cb = {
+      onStart,
+      onSlide,
+      onLeave,
+      onResize,
+    };
     this.init();
     this.slide();
     this.afterLoad();
     this.afterResize();
     setTimeout(() => {
       window.scrollTo(0, 0);
-    }, 300);
+    });
   }
   init() {
     document.body.classList.add(this.container);
     this.muview.classList.add(`${this.container}__wrapper`);
-    this.muview.style.transitionDuration = `${this.delay}ms`;
+    this.muview.style.transitionDuration = `${this.state.delay}ms`;
     this.setSectionHeight();
     this.setTransform();
   }
   afterLoad() {
     this.sections.forEach((sectionEl, key) => {
-      if (this.initId === sectionEl.dataset.mvId) {
-        this.index = key;
+      if (this.state.initId === sectionEl.dataset.mvId) {
+        this.state.index = key;
       }
     });
   }
   afterResize() {
     const onResize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_debounce__["a" /* default */])(() => {
-      if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.onResize)) {
-        this.onResize(this.index, this.direction);
+      if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.cb.onResize)) {
+        this.cb.onResize(this.state.index, this.direction);
       }
       this.setSectionHeight();
       this.setTransform();
-    }, this.delay);
+    }, this.state.delay);
     window.addEventListener('resize', onResize);
   }
   setSectionHeight() {
@@ -215,28 +219,28 @@ class Muview {
     }
   }
   setTransform() {
-    this.transform = -this.index * this.sectionHeight;
-    this.muview.style.transform = `translate3d(0, ${Math.floor(this.transform)}px, 0)`;
+    this.state.transform = -this.state.index * this.sectionHeight;
+    this.muview.style.transform = `translate3d(0, ${Math.floor(this.state.transform)}px, 0)`;
   }
   setIndex() {
     this.sections.forEach((sectionEl, key) => {
-      if (this.id === sectionEl.dataset.mvId) {
-        this.index = key;
+      if (this.state.id === sectionEl.dataset.mvId) {
+        this.state.index = key;
       }
     });
   }
   setHash() {
-    if (this.sections[this.index].dataset.mvId) {
-      this.hash = this.sections[this.index].dataset.mvId;
+    if (this.sections[this.state.index].dataset.mvId) {
+      this.hash = this.sections[this.state.index].dataset.mvId;
       window.location.hash = this.hash;
       this.updateId();
     }
   }
   changeIndexBy(value) {
-    this.index += value;
+    this.state.index += value;
   }
   updateId() {
-    this.id = window.location.hash.replace(/\?|#/, '');
+    this.state.id = window.location.hash.replace(/\?|#/, '');
   }
   slide() {
     window.addEventListener('hashchange', () => {
@@ -244,25 +248,28 @@ class Muview {
       this.setIndex();
       this.setTransform();
     });
-    this.time = Date.now();
+    let time = Date.now();
     window.addEventListener('wheel', (e) => {
-      this.direction = e.deltaY < 0 ? 'up' : 'down';
-      if (((this.time + this.delay) - Date.now()) < 0) {
-        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.onStart)) {
-          this.onStart(this.index, this.direction);
-        }
-        setTimeout(() => {
-          if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.onLeave)) {
-            this.onLeave(this.index, this.direction);
+      if (Math.abs(e.wheelDelta) >= 80) {
+        this.direction = e.deltaY < 0 ? 'up' : 'down';
+        if (((time + this.state.delay) - Date.now()) < 0) {
+          if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.cb.onStart)) {
+            this.cb.onStart(this.state.index, this.direction);
           }
-        }, this.delay);
-        if (this.direction === 'up' && this.index > 0) {
-          this.changeIndexBy(-1);
-        } else if (this.direction === 'down' && this.index < this.sections.length - 1) {
-          this.changeIndexBy(1);
+          setTimeout(() => {
+            if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.cb.onLeave)) {
+              this.cb.onLeave(this.state.index, this.direction);
+            }
+          }, this.state.delay);
+          if (this.direction === 'up' && this.state.index > 0) {
+            this.changeIndexBy(-1);
+            this.setHash();
+          } else if (this.direction === 'down' && this.state.index < this.sections.length - 1) {
+            this.changeIndexBy(1);
+            this.setHash();
+          }
+          time = Date.now();
         }
-        this.setHash();
-        this.time = Date.now();
       }
     });
   }
@@ -397,53 +404,6 @@ class Point {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = debounce;
-function debounce(callback, wait, context = this) {
-  let timeout = null;
-  let callbackArgs = null;
-  const later = () => callback.apply(context, callbackArgs);
-  return (...args) => {
-    callbackArgs = args;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/**
- * If it's a function it should return true, otherwise it will return false.
- * @param {Function} [fn]
- * @returns {Boolean}
- */
-function isFn(fn) {
-  return (fn && typeof fn === 'function');
-}
-/* harmony default export */ __webpack_exports__["a"] = isFn;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = randomNumber;
-function randomNumber(getMin, getMax) {
-  const min = Math.ceil(getMin);
-  const max = Math.floor(getMax);
-  return Math.floor(Math.random() * ((max - min) + 1)) + min;
-}
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_initNav__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_initNav___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__modules_initNav__);
@@ -468,6 +428,53 @@ if (window.matchMedia('(min-width: 1199px)').matches) {
 }
 
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__functions_gameLoop__["b" /* gameLoop */])();
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = debounce;
+function debounce(callback, wait, context = this) {
+  let timeout = null;
+  let callbackArgs = null;
+  const later = () => callback.apply(context, callbackArgs);
+  return (...args) => {
+    callbackArgs = args;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * If it's a function it should return true, otherwise it will return false.
+ * @param {Function} [fn]
+ * @returns {Boolean}
+ */
+function isFn(fn) {
+  return (fn && typeof fn === 'function');
+}
+/* harmony default export */ __webpack_exports__["a"] = (isFn);
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = randomNumber;
+function randomNumber(getMin, getMax) {
+  const min = Math.ceil(getMin);
+  const max = Math.floor(getMax);
+  return Math.floor(Math.random() * ((max - min) + 1)) + min;
+}
 
 
 /***/ })

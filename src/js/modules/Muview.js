@@ -99,7 +99,6 @@ export default class Muview {
     });
     let time = Date.now();
     window.addEventListener('wheel', (e) => {
-      console.log(e.wheelDelta);
       if (Math.abs(e.wheelDelta) >= 80) {
         this.direction = e.deltaY < 0 ? 'up' : 'down';
         if (((time + this.state.delay) - Date.now()) < 0) {
