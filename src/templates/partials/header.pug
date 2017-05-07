@@ -4,10 +4,10 @@ header.header
     ul.nav__list.nav-list.active
       - const icons = require(`${dirname}/src/data/header-svg/header-svg.json`).icons;
       each icon in icons
-        - const anchor = icon.svg.anchor;
+        - var anchor = icon.svg.anchor;
         li.nav-list__item
           a.nav-list__link(href=anchor.href, title=anchor.title)
-            - const attr = icon.svg.attr;
+            - var attr = icon.svg.attr;
             svg(
               x=attr.x || 0,
               y=attr.y || 0,
@@ -16,7 +16,7 @@ header.header
               viewBox=attr.viewBox || 0
             )
               mixin createGroup(data)
-                - const path = data.path;
+                - var path = data.path;
                 if path && path.d
                   path(d!=path.d)
 
@@ -28,11 +28,11 @@ header.header
                           g
                             +createGroup(gn)
                             
-                      - const path = g.path;
+                      - var path = g.path;
                       if path && path.d
                         path(d!=path.d)
 
-                      - const circle = g.circle;
+                      - var circle = g.circle;
                       if circle && circle.cx && circle.cy && circle.r
                         circle(cx!=circle.cx, cy!=circle.cy, r!=circle.r)
               +createGroup(icon.svg)

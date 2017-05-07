@@ -31,12 +31,12 @@ html(lang='pl')
             each skill in skills
               h2.intro__heading #{skill.skillsHeading}
               .skills
-                - const groups = skill.skillsGroup;
+                - var groups = skill.skillsGroup;
                 each group in groups
                   .skills__col.skills-set
                     h3.skills-set__heading #{group.skillsTech}
                     ul.skills-set__list.skills-list
-                      - const techs = group.skillsDesc;
+                      - var techs = group.skillsDesc;
                       each tech in techs
                         li.skills-list__item
                           include ./mixins/tooltip
@@ -54,6 +54,10 @@ html(lang='pl')
         .container
           .intro.intro--contact
             h2.intro__heading Kontakt
-            .intro__content Piotr Sochacz
+            .intro__content
+              ul
+                li mail: <a href="pior.aueternum@gmail.com">piotr.aueternum@gmail.com</a>
+                li telefon: <a href="">123 321 958</a> 
+
     include ./partials/footer
     include ./partials/foot

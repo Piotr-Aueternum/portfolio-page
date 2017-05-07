@@ -19,8 +19,8 @@ export default class Muview {
       transform: 0,
       index: 0,
       id: window.location.hash.replace(/\?|#/, ''),
-      initId: this.id,
     };
+    this.state.initId = this.state.id;
     this.cb = {
       onStart,
       onSlide,
@@ -33,7 +33,7 @@ export default class Muview {
     this.afterResize();
     setTimeout(() => {
       window.scrollTo(0, 0);
-    });
+    }, this.state.delay);
   }
   init() {
     document.body.classList.add(this.container);

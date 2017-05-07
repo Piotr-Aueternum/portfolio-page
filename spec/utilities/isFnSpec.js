@@ -1,4 +1,4 @@
-describe("Function", function() {
+describe("isFn", function() {
   var isFn = require('../../src/js/utilities/isFn');
   it("should return boolean", function() {
     expect(isFn(function() {})).toEqual(true);
