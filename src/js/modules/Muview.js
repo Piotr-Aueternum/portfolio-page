@@ -100,7 +100,7 @@ export default class Muview {
     let time = Date.now();
     window.addEventListener('wheel', (e) => {
       if (Math.abs(e.wheelDelta) >= 80) {
-        this.direction = e.deltaY < 0 ? 'up' : 'down';
+        this.direction = e.deltaY < 0 ? 1 : -1;
         if (((time + this.state.delay) - Date.now()) < 0) {
           if (isFn(this.cb.onStart)) {
             this.cb.onStart(this.state.index, this.direction);
@@ -110,11 +110,9 @@ export default class Muview {
               this.cb.onLeave(this.state.index, this.direction);
             }
           }, this.state.delay);
-          if (this.direction === 'up' && this.state.index > 0) {
-            this.changeIndexBy(-1);
-            this.setHash();
-          } else if (this.direction === 'down' && this.state.index < this.sections.length - 1) {
-            this.changeIndexBy(1);
+          if ((this.direction === 1 && this.state.index > 0)
+          || (this.direction === -1 && this.state.index < this.sections.length - 1)) {
+            this.changeIndexBy(-this.direction);
             this.setHash();
           }
           time = Date.now();

@@ -71,12 +71,11 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = randomNumber;
-function randomNumber(getMin, getMax) {
+/* harmony default export */ __webpack_exports__["a"] = ((getMin, getMax) => {
   const min = Math.ceil(getMin);
   const max = Math.floor(getMax);
   return Math.floor(Math.random() * ((max - min) + 1)) + min;
-}
+});
 
 
 /***/ }),
@@ -87,11 +86,12 @@ function randomNumber(getMin, getMax) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__class_Circle__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__ = __webpack_require__(0);
 /* harmony export (immutable) */ __webpack_exports__["b"] = gameLoop;
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return canvas; });
 
 
 
 const canvas = document.getElementById('dots');
+/* harmony export (immutable) */ __webpack_exports__["a"] = canvas;
+
 
 const ctx = canvas.getContext('2d');
 canvas.width = document.body.clientWidth;
@@ -153,14 +153,13 @@ function gameLoop() {
 }
 
 
-
-
 /***/ }),
 /* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_isFn__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utilities_isFn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_debounce__ = __webpack_require__(7);
 
 
@@ -215,7 +214,7 @@ class Muview {
   }
   afterResize() {
     const onResize = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_debounce__["a" /* default */])(() => {
-      if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.cb.onResize)) {
+      if (__WEBPACK_IMPORTED_MODULE_0__utilities_isFn___default()(this.cb.onResize)) {
         this.cb.onResize(this.state.index, this.direction);
       }
       this.setSectionHeight();
@@ -264,21 +263,19 @@ class Muview {
     let time = Date.now();
     window.addEventListener('wheel', (e) => {
       if (Math.abs(e.wheelDelta) >= 80) {
-        this.direction = e.deltaY < 0 ? 'up' : 'down';
+        this.direction = e.deltaY < 0 ? 1 : -1;
         if (((time + this.state.delay) - Date.now()) < 0) {
-          if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.cb.onStart)) {
+          if (__WEBPACK_IMPORTED_MODULE_0__utilities_isFn___default()(this.cb.onStart)) {
             this.cb.onStart(this.state.index, this.direction);
           }
           setTimeout(() => {
-            if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utilities_isFn__["a" /* default */])(this.cb.onLeave)) {
+            if (__WEBPACK_IMPORTED_MODULE_0__utilities_isFn___default()(this.cb.onLeave)) {
               this.cb.onLeave(this.state.index, this.direction);
             }
           }, this.state.delay);
-          if (this.direction === 'up' && this.state.index > 0) {
-            this.changeIndexBy(-1);
-            this.setHash();
-          } else if (this.direction === 'down' && this.state.index < this.sections.length - 1) {
-            this.changeIndexBy(1);
+          if ((this.direction === 1 && this.state.index > 0)
+          || (this.direction === -1 && this.state.index < this.sections.length - 1)) {
+            this.changeIndexBy(-this.direction);
             this.setHash();
           }
           time = Date.now();
@@ -301,12 +298,9 @@ function initNav(nodeNav) {
   const list = nav.querySelector(`${nodeNav}__list`);
   const activeClass = 'active';
   list.classList.remove(activeClass);
-  function expand() {
+  toggle.addEventListener('click', () => {
     list.classList.toggle(activeClass);
     toggle.classList.toggle(activeClass);
-  }
-  toggle.addEventListener('click', () => {
-    expand();
   });
 }
 initNav('.nav');
@@ -336,7 +330,6 @@ class Circle extends __WEBPACK_IMPORTED_MODULE_0__Point__["a" /* default */] {
     this.canvas = canvas;
     this.radius = radius;
     this.color = color;
-    this.gravity = false;
   }
   render(getCtx, lagOffset) {
     this.renderX = ((this.x - this.oldX) * lagOffset) + this.oldX;
@@ -374,10 +367,6 @@ class Circle extends __WEBPACK_IMPORTED_MODULE_0__Point__["a" /* default */] {
   }
   update() {
     this.boundary();
-    if (this.gravity === true) {
-      this.vy *= 0.99;
-      this.vy += 0.25;
-    }
     this.x += this.vx * (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(-100, 100) / 100);
     this.y += this.vy * (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utilities_randomNumber__["a" /* default */])(-100, 100) / 100);
     this.x += this.vx;
@@ -435,11 +424,9 @@ if (window.matchMedia('(min-width: 1199px)').matches) {
     container: 'muview',
     section: '.section',
     delay: 700,
-    onResize: () => {
-      setTimeout(() => {
-        __WEBPACK_IMPORTED_MODULE_2__functions_gameLoop__["a" /* canvas */].height = document.querySelector('.muview__wrapper > .section').offsetHeight;
-      });
-    },
+    onResize: () => setTimeout(() => {
+      __WEBPACK_IMPORTED_MODULE_2__functions_gameLoop__["a" /* canvas */].height = document.querySelector('.muview__wrapper > .section').offsetHeight;
+    }),
   });
   muview.init();
 }
@@ -452,8 +439,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__functions_gameLoop__["b" /* g
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = debounce;
-function debounce(callback, wait, context = this) {
+/* harmony default export */ __webpack_exports__["a"] = ((callback, wait, context = this) => {
   let timeout = null;
   let callbackArgs = null;
   const later = () => callback.apply(context, callbackArgs);
@@ -462,23 +448,19 @@ function debounce(callback, wait, context = this) {
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
   };
-}
+});
 
 
 /***/ }),
 /* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 /**
  * If it's a function it should return true, otherwise it will return false.
  * @param {Function} [fn]
  * @returns {Boolean}
  */
-function isFn(fn) {
-  return (fn && typeof fn === 'function');
-}
-/* harmony default export */ __webpack_exports__["a"] = (isFn);
+module.exports = fn => Boolean(fn && typeof fn === 'function');
 
 
 /***/ })

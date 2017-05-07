@@ -4,7 +4,8 @@
   "description": "Boilerplate",
   "main": "gulpfile.js",
   "scripts": {
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "test": "jasmine"
   },
   "author": "",
   "license": "ISC",
@@ -29,10 +30,9 @@
     "gulp-plumber": "^1.1.0",
     "gulp-pug": "^3.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-stylint": "^4.0.0",
     "gulp-stylus": "^2.5.0",
-    "gulp-uglify": "^2.0.0",
     "gulp.spritesmith": "^6.2.1",
+    "jasmine": "^2.6.0",
     "merge-stream": "^1.0.0",
     "webpack": "^2.2.1",
     "webpack-stream": "^3.2.0"

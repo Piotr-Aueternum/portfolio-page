@@ -1,7 +1,7 @@
 import Circle from '../class/Circle';
 import randomNumber from '../utilities/randomNumber';
 
-const canvas = document.getElementById('dots');
+export const canvas = document.getElementById('dots');
 
 const ctx = canvas.getContext('2d');
 canvas.width = document.body.clientWidth;
@@ -61,5 +61,3 @@ export function gameLoop() {
   const lagOffset = lag / frameDuration;
   render(lagOffset);
 }
-
-export { canvas };

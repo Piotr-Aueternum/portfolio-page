@@ -7,11 +7,9 @@ if (window.matchMedia('(min-width: 1199px)').matches) {
     container: 'muview',
     section: '.section',
     delay: 700,
-    onResize: () => {
-      setTimeout(() => {
-        canvas.height = document.querySelector('.muview__wrapper > .section').offsetHeight;
-      });
-    },
+    onResize: () => setTimeout(() => {
+      canvas.height = document.querySelector('.muview__wrapper > .section').offsetHeight;
+    }),
   });
   muview.init();
 }

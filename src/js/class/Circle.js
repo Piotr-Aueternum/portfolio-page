@@ -15,7 +15,6 @@ export default class Circle extends Point {
     this.canvas = canvas;
     this.radius = radius;
     this.color = color;
-    this.gravity = false;
   }
   render(getCtx, lagOffset) {
     this.renderX = ((this.x - this.oldX) * lagOffset) + this.oldX;
@@ -53,10 +52,6 @@ export default class Circle extends Point {
   }
   update() {
     this.boundary();
-    if (this.gravity === true) {
-      this.vy *= 0.99;
-      this.vy += 0.25;
-    }
     this.x += this.vx * (randomNumber(-100, 100) / 100);
     this.y += this.vy * (randomNumber(-100, 100) / 100);
     this.x += this.vx;

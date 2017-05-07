@@ -3,7 +3,4 @@
  * @param {Function} [fn]
  * @returns {Boolean}
  */
-function isFn(fn) {
-  return (fn && typeof fn === 'function');
-}
-export default isFn;
+module.exports = fn => Boolean(fn && typeof fn === 'function');

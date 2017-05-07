@@ -1,4 +1,4 @@
-export default function debounce(callback, wait, context = this) {
+export default (callback, wait, context = this) => {
   let timeout = null;
   let callbackArgs = null;
   const later = () => callback.apply(context, callbackArgs);
@@ -7,4 +7,4 @@ export default function debounce(callback, wait, context = this) {
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
   };
-}
+};

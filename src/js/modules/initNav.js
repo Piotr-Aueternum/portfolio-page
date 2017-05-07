@@ -4,12 +4,9 @@ function initNav(nodeNav) {
   const list = nav.querySelector(`${nodeNav}__list`);
   const activeClass = 'active';
   list.classList.remove(activeClass);
-  function expand() {
+  toggle.addEventListener('click', () => {
     list.classList.toggle(activeClass);
     toggle.classList.toggle(activeClass);
-  }
-  toggle.addEventListener('click', () => {
-    expand();
   });
 }
 initNav('.nav');
