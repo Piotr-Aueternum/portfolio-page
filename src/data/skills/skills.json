@@ -41,6 +41,14 @@
           "skillsTech": "JS",
           "skillsDesc": [
             {
+              "techHeading": "React",
+              "techDesc": "Poznałem działanie i założenia, zreazlizowałem kilka projektóœ z jego użyciem, dzięki czemu lepiej się z nim zaznajomiłem."
+            },
+            {
+              "techHeading": "Redux",
+              "techDesc": "Zapoznałem się z Reduxem i jego działaniem, podczas realizacji jednego z projektów. Do obsługi asynchronicznych danych skorzystałem dodatkowo z Redux Saga."
+            },
+            {
               "techHeading": "ES5",
               "techDesc": "Czuje się swobodnie w&nbsp;ES5, znajomość tej wersji standardu pozwala na&nbsp;pisanie kodu działającego w&nbsp;wielu popularnych przeglądarkach."
             },
@@ -80,10 +88,6 @@
           "skillsTech": "JS",
           "skillsDesc": [
             {
-              "techHeading": "React",
-              "techDesc": "Poznałem działanie i założenia biblioteki od Facebooka, wiem jakie korzyści i wady niesie jego użytkowanie."
-            },
-            {
               "techHeading": "Vue",
               "techDesc": "Lekka i przyjemna biblioteka do&nbsp;tworzenia warstwy widoku w&nbsp;aplikacji, używająca szablonów."
             },
@@ -111,6 +115,10 @@
             {
               "techHeading": "Wordpress",
               "techDesc": "Znajomość panelu admina, lokalizacji plików."
+            },
+            {
+              "techHeading": "Symfony2",
+              "techDesc": "Podczas pierwszych praktyk poznałem podstawy związane z Symfony2 i jego założenia."
             },
             {
               "techHeading": "Twig",
