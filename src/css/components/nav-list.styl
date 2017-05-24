@@ -1,4 +1,5 @@
-rotateAmount = 23deg
+rotateAmount = 30deg
+itemWidth = 12rem
 colors = #fff #4C31FF #C40CE8 #FF0000 #E85F0C #FFB70D
 easing = cubic-bezier(0.43, 1.99, 0.58, 0.87)
 switchDuration = 0.3s
@@ -43,7 +44,7 @@ switchDuration = 0.3s
   &.active
     .nav-list
       &__item
-        width 15rem
+        width itemWidth
     for color, i in colors
       .nav-list
         &__item:nth-child({i})
