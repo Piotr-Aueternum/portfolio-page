@@ -4,14 +4,19 @@
   align-items flex-start
   justify-content center
   flex-direction column
+  +max(sm)
+    padding-top 2rem
   &__heading
   &__lead
     font-weight 400
     letter-spacing 0.05rem
     position relative
     z-index 1
+    text-shadow 1px 1px 0px #000
   &__heading
     margin-bottom 2rem
+    +max(sm)
+      font-size 3rem
     &::before
       content ''
       position absolute
