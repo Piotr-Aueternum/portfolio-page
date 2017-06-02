@@ -10,25 +10,11 @@ import js from './gulp/task/js';
 global.require = require;
 global.dirname = __dirname;
 
-gulp.task('image', () => {
-  image();
-});
-
-gulp.task('html', () => {
-  html();
-});
-
-gulp.task('css', () => {
-  css();
-});
-
-gulp.task('js', () => {
-  js();
-});
-
-gulp.task('sprite', () => {
-  sprite();
-});
+gulp.task('image', () => image());
+gulp.task('html', () => html());
+gulp.task('css', () => css());
+gulp.task('js', () => js());
+gulp.task('sprite', () => sprite());
 
 gulp.task('default', ['watch'], () => {
   console.log(`${consoleTime()}Frontend Developer Boilerplate by https://github.com/Piotr-Aueternum`);

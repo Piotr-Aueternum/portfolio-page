@@ -36,8 +36,13 @@ export default class Muview {
     this.muview.style.transitionDuration = `${this.delay}ms`;
     this.setSectionHeight();
     this.setTransform();
-    this.sections.forEach((sectionEl, key) => {
-      if (this.initId === sectionEl.dataset.mvId) {
+    this.sections.forEach((section, key) => {
+      if (section.id) {
+        const sectionNode = document.getElementById(section.id);
+        sectionNode.dataset.mvId = section.id;
+        sectionNode.removeAttribute('id');
+      }
+      if (this.initId === section.dataset.mvId) {
         this.index = key;
       }
     });

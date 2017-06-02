@@ -2,12 +2,12 @@ import gulp from 'gulp';
 import rename from 'gulp-rename';
 import spritesmith from 'gulp.spritesmith';
 import merge from 'merge-stream';
-  
-export default function js() {  
+
+export default () => {
   const spriteData = gulp.src('src/css/sprites/*.png')
     .pipe(spritesmith({
       imgName: 'sprite.png',
-      cssName: 'sprite.css'
+      cssName: 'sprite.css',
     }));
 
   const imgStream = spriteData.img
@@ -15,9 +15,9 @@ export default function js() {
 
   const cssStream = spriteData.css
     .pipe(rename({
-      extname: ".styl"
+      extname: '.styl',
     }))
     .pipe(gulp.dest('src/css/tools/'));
 
   return merge(imgStream, cssStream);
-}
+};

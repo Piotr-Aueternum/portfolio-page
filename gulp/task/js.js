@@ -2,8 +2,8 @@ import gulp from 'gulp';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
 import plumber from 'gulp-plumber';
-  
-export default function js() {  
+
+export default () =>
   gulp.src('src/js/index.js')
     .pipe(plumber())
     .pipe(webpackStream({
@@ -16,7 +16,7 @@ export default function js() {
             test: /\.js$/,
             loader: 'eslint-loader',
             exclude: /node_modules/,
-          }
+          },
         ],
       },
     }, webpack, (err, stats) => {
@@ -24,4 +24,3 @@ export default function js() {
     }))
     .pipe(plumber.stop())
     .pipe(gulp.dest('dist/assets'));
-}

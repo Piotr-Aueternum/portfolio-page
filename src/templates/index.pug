@@ -4,13 +4,13 @@ html(lang='pl')
   body
     include ./partials/header
     main#muview
-      section.section.dark-background(data-mv-id='intro')
+      section.section.dark-background(id='intro')
         canvas.canvas-background#dots
         .container
           .intro.intro--home
             h1.intro__heading Frontend Developer
             h2.intro__lead Piotr Sochacz
-      section.section(data-mv-id='about')
+      section.section(id='about')
         .container
           .intro.intro--about
             h2.intro__heading O mnie
@@ -24,7 +24,7 @@ html(lang='pl')
               <br>Lubie się dzielić poznanymi rzeczami z innymi, również aktywnie
               <br>udzielam się na grupach facebookowych związanych z programowaniem.
               <br>Wybrałem frontend ze względu na widoczne efekty pracy i poczucie estetyki.
-      section.section(data-mv-id='skills')
+      section.section(id='skills')
         .container
           .intro.intro--skills
             - const skills = require(`${dirname}/src/data/skills/skills.json`).skills;
@@ -45,7 +45,7 @@ html(lang='pl')
                             p.tooltip__description
                               span.tooltip__lead #{tech.techHeading}
                               | !{tech.techDesc}
-      section.section(data-mv-id='contact')
+      section.section(id='contact')
         .container
           .intro.intro--contact
             h2.intro__heading Kontakt

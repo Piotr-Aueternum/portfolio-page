@@ -7,7 +7,7 @@ import autoprefixer from 'gulp-autoprefixer';
 import gulpCleanCSS from 'gulp-clean-css';
 import consoleTime from './../functions/consoleTime';
 
-export default function css() {
+export default () =>
   gulp.src('src/css/style.styl')
     .pipe(plumber())
     .pipe(stylus())
@@ -20,4 +20,3 @@ export default function css() {
     .pipe(plumber.stop())
     .pipe(gulp.dest('dist/assets'))
     .pipe(bs.stream({ match: '**/*.css' }));
-}
